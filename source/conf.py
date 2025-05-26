@@ -27,7 +27,10 @@ release = '0.0.1'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['recommonmark','sphinx_markdown_tables']
+extensions = [
+    'myst_parser',
+    'sphinx_markdown_tables',  # 可保留，支持 markdown 表格扩展
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -51,7 +54,10 @@ html_theme_options = {
   ]
 }
 
-source_suffix = ['.rst', '.md']
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 
 # -- Options for HTML output -------------------------------------------------
 

@@ -2,6 +2,7 @@
 
 ## Backbones
 
+### GNN
 
 ## Environment
 
@@ -13,5 +14,6 @@
 
 ### neural operations
 
+see [deepaco](../methods/construct/deepaco.md)
 
 ### traditional operations
