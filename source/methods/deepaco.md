@@ -18,25 +18,24 @@ python train.py settings=deepaco_settings mode=train problem=bpp
 ```
 
 
-
-## Data
+## Tasks
 
 Supported Tasks: TSP, CVRP, OP, PCTSP, SOP, SMTWTP, RCPSP, MKP, BPP.
 
 Required Data Generator:
-+ [`TSPGenerator`](../../developer_doc/data.md#tsp)
-+ [`CVRPGenerator`](../../developer_doc/data.md#cvrp)
-+ [`OPGenerator`](../../developer_doc/data.md#op)
-+ [`PCTSPGenerator`](../../developer_doc/data.md#pctsp)
-+ [`SOPGenerator`](../../developer_doc/data.md#sop)
-+ [`SMTWTPGenerator`](../../developer_doc/data.md#smtwtp)
-+ [`RCPSPGenerator`](../../developer_doc/data.md#rcpsp)
-+ [`MKPGenerator`](../../developer_doc/data.md#mkp)
-+ [`BPPGenerator`](../../developer_doc/data.md#bpp)
++ [`TSPGenerator`](../developer_doc/data.md#tsp)
++ [`CVRPGenerator`](../developer_doc/data.md#cvrp)
++ [`OPGenerator`](../developer_doc/data.md#op)
++ [`PCTSPGenerator`](../developer_doc/data.md#pctsp)
++ [`SOPGenerator`](../developer_doc/data.md#sop)
++ [`SMTWTPGenerator`](../developer_doc/data.md#smtwtp)
++ [`RCPSPGenerator`](../developer_doc/data.md#rcpsp)
++ [`MKPGenerator`](../developer_doc/data.md#mkp)
++ [`BPPGenerator`](../developer_doc/data.md#bpp)
 
 ## Backbone
 
-DeepACO predicts heuristic information using [GNN](../../developer_doc/methods.md#gnn). In particular, [Transformer](../../developer_doc/methods.md#transformer) has also been used in MKP.
+DeepACO predicts heuristic information using [GNN](../developer_doc/methods.md#gnn). In particular, [Transformer](../developer_doc/methods.md#transformer) has also been used in MKP.
 
 + GNN
   + `EmbNet()`: update node and edge features to obtain edge embeddings.
@@ -67,4 +66,4 @@ DeepACO predicts heuristic information using [GNN](../../developer_doc/methods.m
 
 ## Training
 
-DeepACO applies non-autoregressive reinforcement learning [`class NARREINFORCENARLightning()`](../../developer_doc/phases.md#autoregressive) for training.
+DeepACO applies non-autoregressive reinforcement learning [`class NARREINFORCENARLightning()`](../developer_doc/phases.md#autoregressive) for training.

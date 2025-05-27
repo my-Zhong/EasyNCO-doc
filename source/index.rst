@@ -114,20 +114,45 @@ EasyNCO supports the following methods:
     :maxdepth: 2
     :caption: Method
 
-    methods/construct/index
-    methods/improve/index
+    methods/am
+    methods/bq
+    methods/dact
+    methods/deepaco
+    methods/difusco
+    methods/dpn
+    methods/elg
+    methods/glop
+    methods/htsp
+    methods/invit
+    methods/lehd
+    methods/LIH
+    methods/matnet
+    methods/MTPOMO
+    methods/MVMoE
+    methods/nlns
+    methods/pointerformer
+    methods/pomo
+    methods/t2t
+
 
 
 .. toctree::
     :maxdepth: 1
     :caption: Task
 
-    tasks/routing
-    tasks/scheduling
-    tasks/packing
-    tasks/assignment
-
-
+    tasks/atsp
+    tasks/bpp
+    tasks/cvrp
+    tasks/ffsp
+    tasks/kp
+    tasks/mis
+    tasks/mkp
+    tasks/op
+    tasks/pctsp
+    tasks/rcpsp
+    tasks/smtwtp
+    tasks/sop
+    tasks/tsp
 
 
 🤝About EasyNCO

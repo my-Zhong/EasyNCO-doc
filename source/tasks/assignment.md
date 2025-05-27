@@ -1,3 +1,0 @@
-# Assignment / Graph Problems
-
-## MIS
