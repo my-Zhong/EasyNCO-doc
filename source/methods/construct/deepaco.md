@@ -2,6 +2,22 @@
 
 DeepACO is a general combinatorial optimization framework that combines graph neural networks with ant colony optimization, using learned heuristics and neural-guided local search to find high-quality solutions.
 
+## Usage
+You can run the following command lines to execute the code.
+
+```bash
+python train.py settings=deepaco_settings mode=train problem=tsp
+python train.py settings=deepaco_settings mode=train problem=cvrp
+python train.py settings=deepaco_settings mode=train problem=op settings.model.feats=2 settings.model.phe_net=True
+python train.py settings=deepaco_settings mode=train problem=pctsp settings.model.feats=2 settings.model.phe_net=True
+python train.py settings=deepaco_settings mode=train problem=sop settings.model.phe_net=True settings.model.update_x=False
+python train.py settings=deepaco_settings mode=train problem=smtwtp settings.model.feats=2 settings.model.phe_net=True settings.model.update_x=False
+python train.py settings=deepaco_settings mode=train problem=rcpsp settings.model.feats=5 settings.model.edge_feats=2
+python train.py settings=deepaco_settings mode=train problem=mkp settings.model.feats=5 settings.model.phe_net=True
+python train.py settings=deepaco_settings mode=train problem=bpp
+```
+
+
 
 ## Data
 
