@@ -6,6 +6,13 @@ DeepACO is a general combinatorial optimization framework that combines graph ne
 You can run the following command lines to execute the code.
 
 ```bash
+python train.py settings=deepaco_settings mode=train problem={problem} settings.model.feats={feats} settings.model.edge_feats={edge_feats} settings.model.phe_net={phe_net} settings.model.update_x={update_x}
+python train.py settings=deepaco_settings mode=train problem=tsp
+python train.py settings=deepaco_settings mode=train problem=op settings.model.feats=2 settings.model.phe_net=True
+```
+
+
+<!-- ```bash
 python train.py settings=deepaco_settings mode=train problem=tsp
 python train.py settings=deepaco_settings mode=train problem=cvrp
 python train.py settings=deepaco_settings mode=train problem=op settings.model.feats=2 settings.model.phe_net=True
@@ -15,7 +22,19 @@ python train.py settings=deepaco_settings mode=train problem=smtwtp settings.mod
 python train.py settings=deepaco_settings mode=train problem=rcpsp settings.model.feats=5 settings.model.edge_feats=2
 python train.py settings=deepaco_settings mode=train problem=mkp settings.model.feats=5 settings.model.phe_net=True
 python train.py settings=deepaco_settings mode=train problem=bpp
-```
+``` -->
+
+| problem | feats | edge_feats | phe_net | update_x |
+|:-----:|:-----:|:------:|:------:|:-----:|
+| tsp | 1(default) | 1(default) | False(default) | True(default) |
+| cvrp |  |  |  |  |
+| op | 2 |  | True |  |
+| pctsp | 2 |  | True |  |
+| sop |  |  | True | False |
+| smtwtp | 2 |  | True | False |
+| rcpsp | 5 | 2 |  |  |
+| mkp | 5 |  | True |  |
+| bpp |  |  |  |  |
 
 
 ## Tasks
