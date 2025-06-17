@@ -1,43 +1,52 @@
-# OP Problem and Data Generation
+# Orienteering Problem (OP)
 
-## Introduction to the OP Problem
-The OP (Orienteering Problem) is a combinatorial optimization problem that focuses on finding a path that visits a subset of nodes to maximize the total collected prize while not exceeding a given travel cost limit.
+## Introduction
+
+The Prize-Collecting Orienteering Problem (OP) aims to identify the optimal route for a vehicle to maximize the total collected prize while not exceeding a given travel cost limit. The vehicle starts and ends at a depot, and each customer has a specific prize and a travel cost associated with visiting it.
 
 ### Problem Description
-- **Nodes with Coordinates and Prizes**: Each node has specific coordinates (e.g., (x, y) in a 2D plane) and an associated prize value.
-- **Travel Cost**: The cost of traveling between nodes, often calculated using methods like Euclidean distance.
-- **Objective**: Maximize the total prize collected by visiting nodes within the travel cost limit.
 
-### Constraints
-- **Travel Cost Limit**: The total travel cost of the path must not exceed a predefined threshold.
-- **Path Continuity**: The path must be continuous, moving directly from one node to another.
+- **Entities**
+  - **Depot**: The starting and ending point for the vehicle.
+  - **Customer**: A location that can be visited to collect a prize.
+  - **Prize**: The reward associated with visiting a customer.
+  - **Travel Cost**: The cost of traveling between locations.
+- **Constraints** 
+  - The vehicle must start and end at the depot.
+  - The total travel cost must not exceed the given limit.
+- **Objective**
+  - Maximize the total collected prize.
 
-## Data Generation with OPGenerator.py
-The `OPGenerator.py` file provides a flexible way to generate data for the OP problem, supporting both random data generation and loading of custom data.
+## Data Generator
 
-### Random Data Generation
-The `random_op_generator` class within `OPGenerator.py` is designed to create random OP data.
+This module mainly provides a function `def OPGenerator()`, which is used to generate a `DataLoader` object (see `OPGenerator.py`).
 
-- **Initialization**: The class is initialized with parameters like the number of samples (`num_sample`), number of nodes (`num_nodes`), and the device (e.g., CPU or GPU).
-- **Data Creation**:
-  - For each sample, random coordinates for nodes are generated using a uniform distribution.
-  - Distances from each node to the starting node (depot) are calculated.
-  - Prizes for the nodes are determined based on these distances, normalized to ensure the start node's prize is zero.
-  - The generated data for each node includes its coordinates and prize value.
++ Generate problem instances randomly (`class random_op_generator()`).
++ Load custom data from a given file (`class customized_op_loader()`).
+
+### Random Data Generator
+**`class random_op_generator()`**
+
+**Attributes:**
++ `num_sample`(`int`): number of samples in the dataset
++ `num_nodes`(`int`): number of customers
++ `device`(`str`): device to store the data (CPU/GPU)
+
+**Function:**
++ `__len__(self) -> int`: returns the total number of samples
++ `__getitem__(self, index) -> tensor`: randomly generates a tensor of shape `(num_nodes, 3)`. Each customer's coordinates are sampled uniformly from `[0, 1]`, and the prize is calculated based on the distance from the depot. The depot is included as the first node.
 
 ### Custom Data Loading
-For users with specific data requirements, the `customized_op_loader` class allows loading custom OP data from files.
+**`class customized_op_loader()`**
 
-- **File Support**: It supports files in `.pkl` (Python pickle) or `.pt` (PyTorch tensor) formats.
-- **Data Loading**: The data is loaded and converted into a tensor format suitable for use with PyTorch.
+**Attributes:**
++ `num_sample`(`int`): number of samples in the dataset
++ `num_nodes`(`int`): number of customers
++ `device`(`str`): device to store the data (CPU/GPU)
++ `path`(`str`): the specified path of custom data
++ `file_type`(`str`): the file type
+> 💡**Tips**: It currently supports files in `.pt` (PyTorch tensor), `.pkl`(Python pickle) format.
 
-### Data Feature
-The output data has three dimensions:
-  - **Two dimensions for the Coordinates**, : representing the x and y positions of the node.
-  - **One dimension for the Prize**, indicating the prize associated with the node.
-
-
-### Using OPGenerator
-The `OPGenerator` function serves as a convenient interface to either generate random data or load custom data based on the provided parameters. It returns a DataLoader object that can be used to efficiently load data in batches during model training or algorithm testing.
-
-By utilizing `OPGenerator.py`, researchers and practitioners can easily prepare and access data for experimenting with and developing solutions for the OP problem.
+**Function:**
++ `__len__(self) -> int`: returns the total number of samples
++ `__getitem__(self, index) -> tensor`: loads data from the specified `index`. The prize is calculated based on the distance from the depot for each customer.
