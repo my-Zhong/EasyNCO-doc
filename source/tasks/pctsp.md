@@ -48,7 +48,7 @@ This module mainly provides a function `def PCTSPGenerator()`, which is used to 
 + `device`(`str`): device to store the data (CPU/GPU)
 + `path`(`str`): the specified path of custom data
 + `file_type`(`str`): the file type
-> 💡**Tips**: It currently supports files in `.pkl` format.
+> 💡**Tips**: It currently supports files in `.pkl`(Python pickle)  format.
 
 
 **Function:**

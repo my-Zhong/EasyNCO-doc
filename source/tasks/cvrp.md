@@ -54,7 +54,7 @@ This module mainly provides a function `def CVRPGenerator()`, which is used to g
 + `device`(`str`): device to store the data (CPU/GPU)
 + `path`(`str`): the specified path of custom data
 + `file_type`(`str`): the file type
-> 💡**Tips**: It currently supports files in `.pt` (PyTorch tensor), `.pkl` format.
+> 💡**Tips**: It currently supports files in `.pt` (PyTorch tensor), `.pkl`(Python pickle) format.
 
 
 **Function:**
