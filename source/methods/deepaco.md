@@ -12,18 +12,6 @@ python train.py settings=deepaco_settings mode=train problem=op settings.model.f
 ```
 
 
-<!-- ```bash
-python train.py settings=deepaco_settings mode=train problem=tsp
-python train.py settings=deepaco_settings mode=train problem=cvrp
-python train.py settings=deepaco_settings mode=train problem=op settings.model.feats=2 settings.model.phe_net=True
-python train.py settings=deepaco_settings mode=train problem=pctsp settings.model.feats=2 settings.model.phe_net=True
-python train.py settings=deepaco_settings mode=train problem=sop settings.model.phe_net=True settings.model.update_x=False
-python train.py settings=deepaco_settings mode=train problem=smtwtp settings.model.feats=2 settings.model.phe_net=True settings.model.update_x=False
-python train.py settings=deepaco_settings mode=train problem=rcpsp settings.model.feats=5 settings.model.edge_feats=2
-python train.py settings=deepaco_settings mode=train problem=mkp settings.model.feats=5 settings.model.phe_net=True
-python train.py settings=deepaco_settings mode=train problem=bpp
-``` -->
-
 | problem | feats | edge_feats | phe_net | update_x |
 |:-----:|:-----:|:------:|:------:|:-----:|
 | tsp | 1(default) | 1(default) | False(default) | True(default) |
@@ -52,13 +40,8 @@ Required Data Generator:
 + [`MKPGenerator`](../developer_doc/data.md#mkp)
 + [`BPPGenerator`](../developer_doc/data.md#bpp)
 
-## Backbone
 
-DeepACO predicts heuristic information using [GNN](../developer_doc/methods.md#gnn). In particular, [Transformer](../developer_doc/methods.md#transformer) has also been used in MKP.
 
-+ GNN
-  + `EmbNet()`: update node and edge features to obtain edge embeddings.
-  + `ParNet()`: inherit from MLP to predict heuristic information.
 
 ## Policy
 
@@ -81,6 +64,11 @@ DeepACO predicts heuristic information using [GNN](../developer_doc/methods.md#g
   + `elitist`(`bool`): Indicates whether to use the elitist strategy, i.e., whether the best path receives additional pheromone reinforcement.
   + `min_max`(`bool`): Indicates whether to use the Min-Max ACO strategy, which imposes upper and lower bounds on pheromone concentration.
   + `min`(`float`): Sets the minimum allowable pheromone value in the Min-Max ACO strategy.
++ Backbone: DeepACO predicts the *heuristic information* of ACO using [GNN](../developer_doc/methods.md#gnn). In particular, [Transformer](../developer_doc/methods.md#transformer) has also been used in MKP.
+
+  + GNN
+    + `EmbNet()`: update node and edge features to obtain edge embeddings.
+    + `ParNet()`: inherit from MLP to predict heuristic information.
 
 
 ## Training
