@@ -1,43 +1,53 @@
-# SOP Problem and Data Generation
 
-## Introduction to the SOP Problem
-The SOP (Sequential Ordering Problem) is a combinatorial optimization problem that involves finding an optimal sequence of nodes to visit, considering specific order constraints.
+# Sequential Ordering Problem (SOP)
+
+## Introduction
+
+The Sequential Ordering Problem (SOP) involves finding a route that starts and ends at a depot, visiting a set of customers in a specific sequence to minimize the total travel cost while satisfying precedence constraints.
 
 ### Problem Description
-- **Nodes with Coordinates**: Each node has specific coordinates (e.g., (x, y) in a 2D plane).
-- **Ordering Constraints**: Certain nodes must be visited before others.
-- **Travel Cost**: The cost of traveling between nodes.
-- **Objective**: Find the optimal path that minimizes the total travel cost while respecting the ordering constraints.
 
-### Constraints
-- **Ordering Constraints**: Specific nodes must be visited before others.
-- **Path Continuity**: The path must be continuous, moving directly from one node to another.
+- **Entities**
+  - **Depot**: The starting and ending point for the route.
+  - **Customer**: A location that must be visited.
+  - **Precedence Constraints**: Define the order in which customers must be visited.
+  - **Travel Cost**: The cost of traveling between locations.
+- **Constraints** 
+  - The route must start and end at the depot.
+  - Precedence constraints must be satisfied.
+- **Objective**
+  - Minimize the total travel cost.
 
-## Data Generation with SOPGenerator.py
-The `SOPGenerator.py` file provides a flexible way to generate data for the SOP problem, supporting both random data generation and loading of custom data.
+## Data Generator
 
-### Random Data Generation
-The `random_sop_generator` class within `SOPGenerator.py` is designed to create random SOP data.
+This module mainly provides a function `def SOPGenerator()`, which is used to generate a `DataLoader` object (see `SOPGenerator.py`).
 
-- **Initialization**: The class is initialized with parameters like the number of samples (`num_sample`), number of nodes (`num_nodes`), and the device (e.g., CPU or GPU).
-- **Data Creation**:
-  - A cost matrix is generated using the `cost_mat_gen` function.
-  - Ordering constraints are generated using the `ordering_constraint_gen` function.
-  - An adjacency matrix is generated based on the ordering constraints using the `adjacency_mat_gen` function.
-  - The generated data includes both the cost matrix and the adjacency matrix.
++ Generate problem instances randomly (`class random_sop_generator()`).
++ Load custom data from a given file (`class customized_sop_loader()`).
+
+### Random Data Generator
+**`class random_sop_generator()`**
+
+**Attributes:**
++ `num_sample`(`int`): number of samples in the dataset
++ `num_nodes`(`int`): number of customers
++ `device`(`str`): device to store the data (CPU/GPU)
+
+**Function:**
++ `__len__(self) -> int`: returns the total number of samples
++ `__getitem__(self, index) -> tensor`: randomly generates a tensor that includes distance matrix and adjacency matrix. Distance matrix represents the travel cost between locations, and adjacency matrix represents the precedence constraints.
 
 ### Custom Data Loading
-For users with specific data requirements, the `customized_sop_loader` class allows loading custom SOP data from files.
+**`class customized_sop_loader()`**
 
-- **File Support**: It supports files in `.pkl` (Python pickle) or `.pt` (PyTorch tensor) formats.
-- **Data Loading**: The data is loaded and converted into a tensor format suitable for use with PyTorch.
+**Attributes:**
++ `num_sample`(`int`): number of samples in the dataset
++ `num_nodes`(`int`): number of customers
++ `device`(`str`): device to store the data (CPU/GPU)
++ `path`(`str`): the specified path of custom data
++ `file_type`(`str`): the file type
+> 💡**Tips**: It currently supports files in `.pt` (PyTorch tensor), `.pkl`(Python pickle) format.
 
-### Data Feature
-The output data has three dimensions:
-  - **Two dimensions for the cost matrix**, representing the travel costs between nodes.
-  - **One dimension for the adjacency matrix**, indicating the ordering constraints between nodes.
-
-### Using SOPGenerator
-The `SOPGenerator` function serves as a convenient interface to either generate random data or load custom data based on the provided parameters. It returns a DataLoader object that can be used to efficiently load data in batches during model training or algorithm testing.
-
-By utilizing `SOPGenerator.py`, researchers and practitioners can easily prepare and access data for experimenting with and developing solutions for the SOP problem.
+**Function:**
++ `__len__(self) -> int`: returns the total number of samples
++ `__getitem__(self, index) -> tensor`: loads data from the specified `index`. The data includes distance matrix and adjacency matrix.
