@@ -44,7 +44,7 @@ Required Data Generator:
 
 + *Lower_slover*
     + *POMO*: It employs the POMO strategy[pomo](../methods/pomo.md#pomo) to generate solutions for sub-fragments. In particular, [Transformer](../developer_doc/methods.md#transformer) has also been applied in the solver.
-    + *LKH*: A *exact solver* [LKH](../developer_doc/exact_solvers.md#LKH)* is used to solve the sub-fragment problem.
+    + *LKH*: A *exact solver* [LKH](../developer_doc/exact_solvers.md#LKH) is used to solve the sub-fragment problem.
 
   
 
