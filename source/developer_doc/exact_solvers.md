@@ -9,9 +9,11 @@ The traditional heuristic solvers currently include five exact solvers: LKH, HGS
 + `HGS_C.py` \ `LKH_CVRP.py` \ `LKH_TSP.py` \ `LKH_ATSP.py` \ `ortool_tsp.py` \ `ortool_cvrp.py ` \ `pyconcorde_run.py` \ `EAX.py` : Call interfaces for each solver, including auto-make function, call functions for data-loader, call functions for problem nodes
 
 ## Solvers intruduction and Required Settings
+## LKH
 + *LKH* : LKH (Lin-Kernighan-Helsgaun) is a high-performance heuristic algorithm specifically designed for solving the Traveling Salesman Problem (TSP) and its variants, employing dynamic λ-opt exchanges and candidate set strategies to obtain near-optimal solutions efficiently.
   + `MAX_TRIALS`(`int`): The number of iterations for LKH
   + `RUNS`(`int`): The number of times a problem is run
+  + `TRACE_LEVEL`(`int`): Log information
   + `SEED`(`int`): Generate seeds for random numbers
 + *HGS* : HGS is a state-of-the-art VRP solver integrating genetic algorithms and adaptive large neighborhood search.
   + `time_threshold`(`int`): The running time of an instance solved by HGS
@@ -21,11 +23,52 @@ The traditional heuristic solvers currently include five exact solvers: LKH, HGS
 + *OR-Tools* :OR-Tools is Google's open-source optimization toolkit for constraint programming and heuristic search.
   + `num_vehicles`(`int`): only for CVRP, number of vehicles
 + *Concorde* : Concorde is the state-of-the-art exact TSP solver using branch-and-cut methods.
+## Reference
+
+
+|  Solver  |                                                                                   Paper Title                                                                                    |                   code                    |
+|:--------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------:|
+|   LKH    |           Helsgaun, K. (2000). An effective implementation of the Lin-Kernighan traveling salesman heuristic. European Journal of Operational Research, 126, 106-130.            | http://akira.ruc.dk/~keld/research/LKH-3/ |
+|   EAX    | Nagata, Y., & Kobayashi, S. (2013). A Powerful Genetic Algorithm Using Edge Assembly Crossover for the Traveling Salesman Problem. INFORMS Journal on Computing, 25(2), 346-363. |  https://github.com/nagata-yuichi/GA-EAX  |
+|   HGS    |              Vidal T. Hybrid genetic search for the CVRP: Open-source implementation and SWAP* neighborhood[J]. Computers & Operations Research, 2022, 140: 105643.              |    https://github.com/vidalt/HGS-CVRP     |
+| OR-Tools |                                                       https://ai.googleblog.com/2019/09/or-tools-now-supports-integer.html                                                       |                     \                     |
+| Concorde |    Applegate, David, Ribert Bixby, Vasek Chvatal, and William Cook. Concorde TSP solver. 2006.                                                                                                                                                                              |  https://github.com/jvkersch/pyconcorde   |
+
+
 ## Parameter Setting
-In the param_setting.py, we classify all parameters to three characters, solver setting, problem setting and working setting.
-
-
-
+In the `param_setting.py`, we classify all parameters to three types, solver setting, problem setting and working setting.
++ `--direct`: We offer two input formats: one allows direct input of node coordinates, while the other utilizes a `data_loader` format. The first format will be used when `--direct` is set to True.
+```python
+#cvrp for example
+depot: The coordinates of the depot. [x_0, y_0]
+loc: A list of node coordinates. [[x_1, y_1],[x_2, y_2],...,[x_n, y_n]]
+demand: A list of node demands. [d_1, d_2, ..., d_n]
+capacity: C(int)
+```
++ `--save_as_txt`:We provide functionality to consolidate all information into a single file, with the final saved format structured as follows: 
+```python
+node_xy:xxx  
+scale: xxx
+distribution: xxx
+attributes: xxx
+solution: xxx
+cost: xxx
+time: xxx s  
+LKH3/Concorde settings:
+```
+```python
+depot_xy: xxx
+node_xy:xxx  
+node_demand: xxx
+capacity: xxx
+scale: xxx
+distribution: xxx
+attributes: xxx
+solution: xxx
+cost: xxx
+time: xxx s  
+LKH3/HGS settings:
+```
 ## Start
 **Using instruction**
 
@@ -36,7 +79,7 @@ In the param_setting.py, we classify all parameters to three characters, solver 
 
 **For example**
 
-+ if you use HGS solver to solve a CVRP problem, and you use nodes directly rather than data_loader
++ If you use HGS solver to solve a CVRP problem, and you use nodes directly rather than data_loader
 ```python
 from exact_solver.param_setting import get_option
 from exact_solver.HGS_C import hgs_solver
@@ -44,8 +87,8 @@ from exact_solver.HGS_C import hgs_solver
 opts = get_option()
 tour, cost = hgs_solver(depot, locs, demand, opts)
 ```
-+ the results will be stored in "exact_solver/result_hgs", the executable will be stored in "exact_solver/use_exe/hgs"
-    
++ The results will be stored in "exact_solver/result_hgs", the executable will be stored in "exact_solver/use_exe/hgs"
+------------------------------------------------------------------------------------------------------------------------    
 + Futhermore, if you use LKH solver to solve a TSP problem with multi-process, you should provide instances in data_loader format
 ```python
 from exact_solver.param_setting import get_option
@@ -58,8 +101,15 @@ opts.cpus = 10
 result = lkh_solver_tsp_multiprocess(data_loader, opts)
 # result: [(tour_1, cost_1),(tour_2, cost_2),......(tour_n,cost_n)]
 ```
++ The results will be stored in "exact_solver/result_lkh_tsp", the executable will be stored in "exact_solver/use_exe/lkh"
+
 ## You should know
 + 1.Auto-make of all solvers are compatible with Linux system. We recommend using a Linux system.
++ 在 Linux 系统上安装 git
+```bash
+sudo apt-get update
+sudo apt-get install git
+```
 + 2.The following problems may occur in Auto-make of concorde: 
 ```python
 ssl.sslCertverificationError: [SSL: CERTIFICATE VERIFY FALED] certificate verify failed: unable to get local issuer certificate ( ssl.c:135)
@@ -72,11 +122,11 @@ ssl._create_default_https_context = ssl._create_unverified_context
 + 3.HGS solver in Windows system: Manually make rather than auto-make
   + (1)make: download mingw referring to 
     ```  
-    https://blog.csdn.net/qq_44940689/article/details/143415825?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522896da9b44ce2b68291305b8019dd4a46%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=896da9b44ce2b68291305b8019dd4a46&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-143415825-null-null.142^v101^pc_search_result_base2&utm_term=windows%20make&spm=1018.2226.3001.4187`
+    https://sourceforge.net/projects/mingw
     ```  
   + (2)cmake: download cmake referring to
     ```
-    https://blog.csdn.net/m0_67656158/article/details/143833925?ops_request_misc=&request_id=&biz_id=102&utm_term=windows%20cmake&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-143833925.142^v101^pc_search_result_base2&spm=1018.2226.3001.4187
+    https://cmake.org/download/
     ```
   + (3)Run the following command:
     ```bash
