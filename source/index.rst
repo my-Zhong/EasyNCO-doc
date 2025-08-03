@@ -72,7 +72,7 @@ EasyNCO supports the following methods:
 +----------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------------+
 | Packing Problems           | KP, MKP, BPP                           | Select items under capacity limits to maximize value or minimize container usage.                        |
 +----------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------------+
-| Assignment / Graph Problems| MIS                                    | Match items or select subsets under structural constraints to optimize objective.                        |
+| Other Graph Problems       | MIS                                    | Match items or select subsets under structural constraints to optimize objective.                        |
 +----------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------------+
 
 
