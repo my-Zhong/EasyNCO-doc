@@ -9,7 +9,7 @@ You can run the following command lines to execute the code.
 python train.py/eval.py settings=dpn_settings mode={train/test} problem={mtsp/mpdp/mdvrp/fmdvrp} scale={problem size} decoder_strategy={sampling/greedy} settings.env.agent_min={agent_min} settings.env.agent_max={agent_max} settings.env.depot_min={depot_min} settings.env.depot_max={depot_max}
 ```
 
-**Note:** For the setting in mTSP and mPDP, the `scale` parameter includes the single depot; for mPDP, this value must be odd (e.g., `scale=101` for 100 nodes). For MDVRP and FMDVRP, the `scale` includes all depots (e.g., `scale=108` for 100 nodes and 8 depots).
+**Note:** For the setting in mTSP and mPDP, the `scale` parameter includes the single depot. For MDVRP and FMDVRP, the `scale` includes all depots.
 
 For more details, the training settings are listed in the tables below. (original paper table5)
 | Problem | mPDP50 & mTSP50 | mPDP100 & mTSP100 |
