@@ -95,135 +95,206 @@ class MultiHeadAttentionLayer(
 + `def positional_encoding`: It is used to add position information to input sequences or graph nodes in Transformers or Diffusion-based models. Notably, `positional_encoding_init` generates a reusable positional encoding table, while `positional_encoding_DIFUSCO` and `positional_encoding_ELG` generate encodings dynamically based on input.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## GNN
 
-### GNN for DIFUSCO
+This module `class GNNEncoder` implements a configurable Graph Neural Network (GNN) encoder. It constructs a GNN backbone composed of multiple GNN layers, each performing node and edge feature updates with gated mechanisms, aggregation, residual connections, and normalization. The network supports both dense and sparse graph inputs and can incorporate positional and temporal embeddings to enhance relational reasoning over graph-structured data.
 
+### `GNNEncoder`
+```python
+class GNNEncoder(
+    n_layers: int = 6,
+    hidden_dim: int = 128,
+    out_channels: int = 1,
+    aggregation: str = "sum",  # "sum", "mean", "max"
+    norm: str = "layer",  # "layer", "batch", None
+    learn_norm: bool = True,
+    track_norm: bool = False,
+    gated: bool = True,
+    sparse: bool = False,
+    use_activation_checkpoint: bool = False,
+    node_feature_only: bool = False,
+)
+```
 
-### GNN for GLOP/UDC/DeepACO
+**Parameters**
++ n_layers (int): Number of stacked GNN layers.
++ hidden_dim (int): Dimension of node and edge hidden embeddings.
++ out_channels (int): Dimension of the output embeddings.
++ aggregation (str): Neighborhood aggregation scheme: "sum", "mean", or "max".
++ norm (str): Feature normalization method: "layer", "batch", or None.
++ learn_norm (bool): Whether normalization has learnable parameters.
++ track_norm (bool): Whether to track running statistics in batch normalization.
++ gated (bool): Whether to use edge gating mechanism.
++ sparse (bool): Whether the input graph is represented in sparse format.
++ use_activation_checkpoint (bool): Whether to use activation checkpointing to save memory.
++ node_feature_only (bool): Whether to update only node features, ignoring edges.
 
-### `EmbNet`
-从图的节点特征和边特征中提取深层次的边嵌入（edge embedding），为后续预测提供丰富的图结构信息。
+**Attributes**
++ node_embed (nn.Linear): Linear embedding layer for node features.
++ edge_embed (nn.Linear): Linear embedding layer for edge features.
++ pos_embed (nn.Module): Positional embedding for nodes or edges (Sine-based).
++ edge_pos_embed (nn.Module): Positional embedding for edges (Sine-based scalar).
++ time_embed (nn.Sequential): Temporal embedding network for time-step features.
++ layers (nn.ModuleList): List of GNNLayer modules for stacked message passing.
++ time_embed_layers (nn.ModuleList): Per-layer time embedding transformations.
++ per_layer_out (nn.ModuleList): Per-layer edge feature output transformations.
 
-#### Parameters
-depth: 网络层数，控制消息传递迭代次数。
+**Methods**
++ forward(x, timesteps, graph=None, edge_index=None): Performs multi-layer GNN encoding, updating node and edge features. Supports dense or sparse graph inputs. Returns edge embeddings or node embeddings depending on configuration.
++ dense_forward(x, graph, timesteps, edge_index=None): Forward pass for dense graph representation.
++ sparse_forward(x, graph, timesteps, edge_index): Forward pass for sparse graph representation.
++ sparse_forward_node_feature_only(x, timesteps, edge_index): Forward pass when only node features are used.
++ sparse_encoding(x, e, edge_index, time_emb): Internal function implementing sparse GNN message passing across all layers.
 
-feats: 节点特征维度。
+### Components
 
-edge_feats: 边特征维度。
+It consists of multiple layers, each composed of GNNLayer + Residual + Normalization + Edge Gating.
 
-units: 每层隐藏单元数（隐藏维度）。
+```python
+for i in range(self.n_layers):
+    h, e = self.layers[i](h, e, graph, mode="residual", edge_index=edge_index, sparse=sparse)
+    if not self.node_feature_only:
+        e = e + time_layer(time_emb)
+    else:
+        h = h + time_layer(time_emb)
+    h = h_in + h
+    e = e_in + out_layer(e)
+```
 
-act_fn: 激活函数名称，默认用 silu。
++ GNNLayer: Performs message passing and gated edge updates.
++ Node update: Aggregates neighbor messages and adds residual connection.
++ Edge update: Combines source node, target node, and edge features with sigmoid gating.
++ Supports aggregation: sum / mean / max.
++ Supports normalization: batch / layer / none.
++ Residual Connection: Adds previous node/edge features to updated features.
++ Normalization: Stabilizes training by normalizing feature distributions.
++ Edge Gating: Controls the contribution of each edge in neighbor aggregation.
 
-agg_fn: 邻居特征聚合方式，默认用 mean 池化。
+```python
+class GNNLayer(
+    hidden_dim: int,
+    aggregation: str = "sum",
+    norm: str = "batch",
+    learn_norm: bool = True,
+    track_norm: bool = False,
+    gated: bool = True,
+)
+```
 
-#### Attributes
+**Parameters**
++ hidden_dim (int): Dimension of hidden node and edge embeddings.
++ aggregation (str): Aggregation method: sum, mean, or max.
++ norm (str): Normalization type: batch, layer, or None.
++ learn_norm (bool): Whether normalization layers are learnable.
++ track_norm (bool): Whether batch statistics are used for batch normalization.
++ gated (bool): Whether to use gating mechanism for edges.
 
-节点和边线性变换层（v_lin0, e_lin0）和多层线性层（v_lins1~4, e_lins0）
+**Attributes**
++ U, V, A, B, C (nn.Linear): Linear layers for node and edge feature transformations.
++ norm_h (nn.Module or None): Node feature normalization layer.
++ norm_e (nn.Module or None): Edge feature normalization layer.
 
-批归一化层（BatchNorm）用于稳定训练
+**Methods**
++ forward(h, e, graph, mode="residual", edge_index=None, sparse=False): Updates node and edge features using gated aggregation and residual connections.
++ aggregate(Vh, graph, gates, mode=None, edge_index=None, sparse=False): Aggregates neighbor messages according to the selected aggregation scheme.
 
-聚合函数使用了PyG的全局池化，比如 global_mean_pool，用于邻居节点信息聚合。
-
-
-#### Methods
-
-每一层都进行节点和边的更新。
-
-节点更新中，邻居节点特征乘以边权重 w2（用Sigmoid限制在[0,1]），聚合后加入自身特征残差。
-
-边更新中结合了两端节点信息。
-
-通过多层迭代，实现复杂的节点和边表示学习。
-
-<details> 
-    <summary>Expand to view code in .py.</summary>
-    <pre><code>
-def forward(self, x, edge_index, edge_attr):
-    x = x
-    w = edge_attr
-    x = self.v_lin0(x)
-    x = self.act_fn(x)
-    w = self.e_lin0(w)
-    w = self.act_fn(w)
-    for i in range(self.depth):
-        x0 = x
-        x1 = self.v_lins1[i](x0)
-        x2 = self.v_lins2[i](x0)
-        x3 = self.v_lins3[i](x0)
-        x4 = self.v_lins4[i](x0)
-        w0 = w
-        w1 = self.e_lins0[i](w0)
-        w2 = torch.sigmoid(w0)
-        x = x0 + self.act_fn(self.v_bns[i](x1 + self.agg_fn(w2 * x2[edge_index[1]], edge_index[0])))
-        w = w0 + self.act_fn(self.e_bns[i](w1 + x3[edge_index[0]] + x4[edge_index[1]]))
-    return x, w
-    </code></pre> 
-</details>
-
-
-
-
-
-
-
-
+### Other Utilities
++ PositionEmbeddingSine: Generates sine-based positional embeddings for node coordinates.
++ ScalarEmbeddingSine: Generates sine-based positional embeddings for scalar edge features.
++ ScalarEmbeddingSine1D: Generates sine-based positional embeddings for 1D scalar inputs.
++ run_sparse_layer: Wraps sparse GNN layer with residual and temporal embeddings.
++ normalize(x): Applies GroupNorm normalization.
++ zero_module(module): Zero-initializes module weights for residual branches.
 
 
 ## Diffusion
 
+This module implements `Gaussian Diffusion` and `Categorical Diffusion` processes for generative modeling. It provides a structured way to add noise to data over a sequence of steps and defines methods for both forward sampling and posterior prediction, which are fundamental in denoising diffusion probabilistic models (DDPM) and their discrete variants.
 
+### `GaussianDiffusion`
+```python
+class GaussianDiffusion(
+    T: int,
+    schedule: str
+)
+```
 
+**Parameters**
++ T (int): Number of diffusion steps.
++ schedule (str): Type of noise schedule, supports 'linear' or 'cosine'.
 
+**Attributes**
++ beta (np.ndarray): Noise level at each timestep.
++ alpha (np.ndarray): Alpha values for each step, alpha = 1 - beta.
++ alphabar (np.ndarray): Cumulative product of alpha over time.
++ betabar (np.ndarray): Cumulative product of beta over time (for convenience).
 
+**Methods**
++ sample(x0, t) -> (xt, epsilon): Given input x0, returns a noisy version at timestep t along with the sampled Gaussian noise epsilon.
++ posterior(target_t, t, pred, xt, inference_trick='ddim') -> xt_target: Computes the posterior distribution of x_{t-1} given x_t and a predicted noise pred. Supports DDPM and DDIM-style inference.
 
+**Notes**
++ Supports linear and cosine noise schedules.
++ Designed for continuous data (Gaussian noise assumption).
++ inference_trick='ddim' allows deterministic transitions for faster sampling.
 
+### `CategoricalDiffusion`
+```python
+class CategoricalDiffusion(
+    T: int,
+    schedule: str,
+    sparse: bool = False
+)
+```
 
+**Parameters**
++ T (int): Number of diffusion steps.
++ schedule (str): Noise schedule type, 'linear' or 'cosine'.
++ sparse (bool): Whether the data is treated as sparse for reshaping.
 
+**Attributes**
++ Qs (np.ndarray): Transition matrices for each diffusion step.
++ Q_bar (np.ndarray): Cumulative product of transition matrices, representing the multi-step transition probabilities.
 
+**Methods**
++ sample(x0_onehot, t) -> xt: Generates a noisy version of discrete input x0_onehot at step t using the cumulative transition matrix.
++ posterior(target_t, t, x0_pred_prob, xt, guided=False, grad=None) -> (xt_target, probability): Computes posterior probabilities for discrete diffusion. Supports optional guided sampling using gradients for conditional generation.
 
+**Notes**
++ Works on discrete data (e.g., binary/categorical).
++ Supports guided diffusion via gradient signals.
++ Handles sparse reshaping to match probabilistic transitions for large discrete spaces.
+
+**Core Concepts**
+
+1. Diffusion Steps (T)
++ Defines how many times noise is added sequentially.
++ Both Gaussian and Categorical diffusion use T to construct cumulative transitions.
+
+2. Noise Schedule
++ linear: Increases noise linearly across steps.
++ cosine: Uses a cosine-based cumulative alpha schedule for smoother transitions.
+
+3. Forward Sampling
++ Continuous: xt = sqrt(alphabar_t) * x0 + sqrt(1 - alphabar_t) * epsilon.
++ Discrete: xt = x0_onehot @ Q_bar_t.
+
+4. Posterior Sampling
++ Continuous: Computes x_{t-1} conditioned on current x_t and predicted noise.
++ Discrete: Uses matrix inversion on cumulative transition matrices to compute probabilities, optionally incorporating gradients for guidance.
+
+5. Sparsity Handling
++ Categorical diffusion supports sparse reshaping for memory efficiency in large discrete domains.
+
+### Usage Example
+```python
+# Gaussian Diffusion
+gd = GaussianDiffusion(T=1000, schedule='linear')
+xt, epsilon = gd.sample(x0, t=50)
+x_prev = gd.posterior(target_t=None, t=50, pred=epsilon, xt=xt)
+
+# Categorical Diffusion
+cd = CategoricalDiffusion(T=1000, schedule='linear', sparse=True)
+xt = cd.sample(x0_onehot, t=50)
+xt_target, prob = cd.posterior(target_t=None, t=50, x0_pred_prob=x0_pred_prob, xt=xt, guided=True, grad=grad)
+```
