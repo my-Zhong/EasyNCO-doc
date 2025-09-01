@@ -1,164 +1,98 @@
 # Backbones
+Our platform integrates three mainstream deep learning backbones to accommodate various NCO solvers.
 
-## Navigation
 - [Transformer](#transformer)
 - [GNN](#gnn)
 - [Diffusion](#diffusion)
 
-
 ## Transformer
 
-该模块实现了一种基于多头注意力（Multi-Head Attention, MHA）的 Transformer 网络架构。构建由多层注意力机制与前馈网络组成的 Transformer 编码器结构，通过残差连接和归一化稳定训练过程，提升对图结构或序列数据的全局建模能力。
+This module `class TransformerNet` implements a Transformer architecture based on Multi-Head Attention (MHA). It constructs a Transformer backbone composed of multiple layers of attention mechanisms and feed-forward networks, and leverages residual connections and normalization to stabilize the training process, thereby enhancing the capability of global modeling over graph-structured or sequential data.
 
-**Classes**
-+ `MultiHeadAttentionLayer`: 实现标准的多头注意力机制，支持权重注入（用于元学习或模型外推）以及可选的 bias 设置。是 Transformer 类模型的核心组件之一。
-+ `TransformerNet`
-+ `Compatibility`
-+ `SkipConnection`
-+ `Normalization`
-+ `FeedForward`
-
-
-**Functions**
-+ `reshape_by_heads`
-+ `multi_head_attention`
-+ `positional_encoding_DIFUSCO`
-+ `positional_encoding_ELG`
-+ `positional_encoding_init`
-
-### `class` `MultiHeadAttentionLayer`
-
-```python
-class MultiHeadAttentionLayer(
-    embed_dim: int,
-    num_heads: int = 8,
-    qkv_dim: int = 16,
-    bias=False,
-    bias3=False,
-)
-```
-
-**Parameters**
-
-+ embed_dim (int): 输入嵌入的维度。
-+ num_heads (int): 注意力头的数量。
-+ qkv_dim (int): 每个头的查询、键、值的维度。
-+ bias (bool | list): 是否为 Q, K, V, output 添加偏置。可为布尔值或布尔列表。
-+ bias3 (bool): 是否为输出层 multi_head_combine 添加偏置。
-
-**Attributes**
-
-+ Wq: 将输入嵌入（q_input）映射成多个注意力头的 Query 向量（查询向量）。
-+ Wk: 将输入嵌入（kv_input）映射成多个注意力头的 Key 向量（键向量）。
-+ Wv: 将输入嵌入（kv_input）映射成多个注意力头的 Value 向量（值向量）。
-+ multi_head_combine: 将所有头的输出拼接后的结果合并回原始的嵌入维度。
-
-**Methods**
-
-+ `forward`: 执行完整的多头注意力计算，包括 query、key、value 的线性变换、head 的拆分、注意力打分和加权、以及最终的多头输出合并。
-
-
-
-
-### `class` `TransformerNet`
-
+### `TransformerNet`
 ```python
 class TransformerNet(
     num_layers: int = 6,
     num_heads: int = 8,
     qkv_dim: int = 16,
     embed_dim: int = 128,
-    normalization: str = "batch",
+    normalization: str = "batch",  # "batch", "instance", None
     feedforward_hidden: int = 512,
-    bias=False,
-    bias3=False,
-)
+    bias: bool = False,  # bias for Wq
+    bias_k: bool = None,  # bias for Wk, if None, use bias for Wk
+    bias_v: bool = None,  # bias for Wv, if None, use bias for Wv
+    bias_combine: bool = True,  # bias for multi_head_combine
+    )
 ```
 
 **Parameters**
-
-+ num_layers (int): Transformer 层的堆叠层数。
-+ num_heads (int): 每层中多头注意力的头数。
-+ qkv_dim (int): 每个注意力头的维度。
-+ embed_dim (int): 输入嵌入和输出的维度。
-+ normalization (str): 使用的归一化方式，支持 "batch"、"layer" 或 None。
-+ feedforward_hidden (int): 前馈网络中间层的维度。
-+ bias (bool): 是否在线性层中使用 bias。
-+ bias3 (bool): 是否在 multi-head combine 层中使用 bias
++ num_layers (int): Number of stacked Transformer layers.
++ num_heads (int): Number of attention heads in each layer.
++ qkv_dim (int): Dimension of each attention head.
++ embed_dim (int): Dimension of the input embeddings and outputs.
++ normalization (str): Type of normalization to use, supports "batch", "layer", or None.
++ feedforward_hidden (int): Dimension of the hidden layer in the feed-forward network.
++ `bias_k`, `bias_v`, `bias_combine` (`bool`): Whether to add bias to K, V and output.
++ `multi_head_combine_used` (bool): Whether to use the output layer multi_head_combine.
 
 **Attributes**
-
-+ MHA_layers (nn.ModuleList): 多层的 MultiHeadAttentionLayer 模块，每层使用 SkipConnection 封装。
-+ norm1 (nn.ModuleList): 每一层 attention 后的归一化模块。
-+ FF_layers (nn.ModuleList): 前馈网络模块列表，每层封装在 SkipConnection 中。
-+ norm2 (nn.ModuleList): 每一层前馈后归一化模块列表。
++ MHA_layers (nn.ModuleList): Multi-layer MultiHeadAttentionLayer modules, each wrapped with a SkipConnection.
++ norm1 (nn.ModuleList): Normalization modules applied after attention in each layer.
++ FF_layers (nn.ModuleList): Feed-forward network modules, each wrapped in a SkipConnection.
++ norm2 (nn.ModuleList): Normalization modules applied after the feed-forward network in each layer.
 
 **Methods**
++ forward(input: torch.Tensor, weights=None): Performs multi-layer Transformer encoding on the input tensor. If an external weights dictionary is provided, it uses the external weights for computation; otherwise, it uses the model’s own parameters. Returns a tensor of shape (batch, graph_size, embed_dim).
 
-+ forward(input: torch.Tensor, weights=None): 对输入张量进行多层 Transformer 编码。若提供外部 weights 字典，则使用外部权重计算；否则使用模型自身权重。返回形状为 (batch, graph_size, embed_dim) 的张量。
+### Components
+It consists of multiple layers, each composed of `MHA layer + Norm + FFN + Norm`.
+```python
+for i in range(self.num_layers):
+    out = self.MHA_layers[i](out)
+    out = self.norm1[i](out)
+    out = self.FF_layers[i](out)
+    out = self.norm2[i](out)
+```
++ `MultiHeadAttentionLayer`: It with `SkipConnection` constitutes the main part of the multi-head attention mechanism, supporting weight loading and optional bias settings.
++ `Normalization`: It supports three types of normalization: **batch**, **instance**, and **None**.
++ `FeedForward`: It consists of two fully connected layers with a non-linear activation function (ReLU or GELU).
++ Another `Normalization`
 
-
-
-### `class` `Compatibility`
 
 ```python
-class Compatibility(
-    embed_dim, 
-    n_heads, 
-    qkv_dim, 
-    key_dim, 
-    am_mode=True, 
-    **kwargs
-)
+class MultiHeadAttentionLayer(
+    embed_dim: int,
+    num_heads: int = 8,
+    qkv_dim: int = 16,
+    bias: bool = False,  # bias for Wq
+    bias_k: bool = None, # bias for Wk, if None, use bias for Wk
+    bias_v: bool = None, # bias for Wv, if None, use bias for Wv
+    bias_combine: bool = True,  # bias for multi_head_combine
+    multi_head_combine_used : bool = True,
+    ):
 ```
 
 **Parameters**
-
-+ embed_dim: 输入嵌入的维度。
-+ n_heads: 注意力头的数量，仅在 am_mode=True 时使用。
-+ qkv_dim: 每个注意力头中的 Q/K/V 的维度。
-+ key_dim: 用于缩放打分的维度（一般为 qkv_dim）。
-+ am_mode: 是否为切换为 Attention Model 模式。若为 True，则对输入进行线性投影生成 query 和 key。若为 False（POMO 模式），则直接使用原始嵌入。
++ embed_dim (int): Dimension of the input embeddings.
++ num_heads (int): Number of attention heads.
++ qkv_dim (int): Dimension of the query, key, and value vectors for each head.
++ `bias_k`, `bias_v`, `bias_combine` (`bool`): Whether to add bias to K, V and output.
++ `multi_head_combine_used` (bool): Whether to use the output layer multi_head_combine.
 
 **Attributes**
-
-+ W_query: 若为 Attention Model 模式，对 query 向量进行线性变换。
-+ W_key: 若为 Attention Model 模式，对 encoded_nodes 进行线性变换。
++ Wq: Maps input embeddings (q_input) to query vectors for multiple attention heads.
++ Wk: Maps input embeddings (kv_input) to key vectors for multiple attention heads.
++ Wv: Maps input embeddings (kv_input) to value vectors for multiple attention heads.
++ multi_head_combine: Merges the concatenated outputs of all heads back into the original embedding dimension.
 
 **Methods**
++ forward: Performs the full multi-head attention computation, including linear projections for queries, keys, and values, head splitting, attention scoring and weighting, and the final multi-head output combination
 
-+ forward(self, q, encoded_nodes, mask=None, logit_clipping=10, penalty=None, **kwargs): 实现单头注意力机制，用于计算当前状态与所有候选节点之间的相似度得分。
-
-### `class` `SkipConnection`
-
-
-
-
-
-### `class` `Normalization`
-
-
-
-
-
-
-### `class` `FeedForward`
-
-
-
-
-### `def` `reshape_by_heads`
-
-
-
-### `def` `multi_head_attention`
-
-
-### `positional_encoding`
-
-+ `positional_encoding_DIFUSCO`
-+ `positional_encoding_ELG`
-+ `positional_encoding_init`
+### Other utils
++ `class Compatibility`: Computes the compatibility score between the current query state and the remaining candidate nodes, producing a probability distribution for action selection. It is used in the RL-based NCO models, such as Attention Model and POMO Model.
++ `def reshape_by_heads`: It is used to reshape the linearly projected Q, K, and V tensors into the format required for multi-head attention.
++ `def multi_head_attention`: It implements the core computation of multi-head attention. Performs parallel attention computation across multiple heads, capturing global dependencies for Transformer encoding.
++ `def positional_encoding`: It is used to add position information to input sequences or graph nodes in Transformers or Diffusion-based models. Notably, `positional_encoding_init` generates a reusable positional encoding table, while `positional_encoding_DIFUSCO` and `positional_encoding_ELG` generate encodings dynamically based on input.
 
 
 

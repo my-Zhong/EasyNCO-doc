@@ -1,5 +1,5 @@
-# Code Structure
+# Architecture
 
-## Code Blocks
+## Pipeline
 
 ## Project structure
