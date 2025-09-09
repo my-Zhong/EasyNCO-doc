@@ -9,11 +9,13 @@ Graphical User Interface (GUI)
 
 
 - **Menu Bar**
+
 insert picture here
     + `github`: Redirects to the `EasyCO` GitHub repository.
     + `documention`:  Redirects to the `EasyCO` documentation page for user guides and references.
 
 - **Server Setup**
+
 insert picture here
     + `host`: The server’s IP address or domain name to connect to.
     + `port`: The specific port number through which the connection is established.
@@ -24,6 +26,7 @@ insert picture here
     + `connect`: The button to initiate the connection to the server with the provided settings
 
 - **Problem**
+
 insert picture here
     + `Problem`: click the problem you want to solve in the `Scroll Bar` Frame.
     + `scale`: If you tick the box on the left, it means you enable the *vary scale* function. Enter the range correctly(min-max).  In this case, a dataset containing multiple scales will be provided to the solver, and the solver will filter out the instances within the specified range and solve them.
@@ -32,6 +35,7 @@ insert picture here
 
 - **Solver**
 > 💡**Tips**:  In case that `Solver` shows properly, please select `Problem` first.
+
 insert picutre here
     + `Solver`: Click the solver you want to apply for the problem in the `Scroll Bar` Frame. Please select `problem` before you select `solver`. 
     + `Save`: Click `Save` button to view historical test results. A pop-up will appear where you can select the results you wish to visualize. The system will automatically create a local backup of the log files (located in the `GUI/log_temp/` directory) for your convenience.  
@@ -42,6 +46,7 @@ insert picutre here
 
 - **Parameter**
 > 💡**Tips**:  In case that `Parameter` shows properly, please select `Problem` and `Solver` first.
+
 insert picutre here
     + `Parameter`:  The `settings` for specific `Solver` would be shown in this frame, at least you choose `Problem` and `Solver` properly.
     insert picture here: you can modified settings_parameters for `Solver` directly in GUI. 
