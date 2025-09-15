@@ -34,7 +34,7 @@ insert picture here
 
 
 - **Solver**
-> 💡**Tips**:  In case that `Solver` shows properly, please select `Problem` first.
+> 💡**Tips**:  To ensure `Solver` are displayed properly, please select `Problem` first.
 
 insert picutre here
     + `Solver`: Click the solver you want to apply for the problem in the `Scroll Bar` Frame. Please select `problem` before you select `solver`. 
@@ -45,18 +45,51 @@ insert picutre here
 
 
 - **Parameter**
-> 💡**Tips**:  In case that `Parameter` shows properly, please select `Problem` and `Solver` first.
+> 💡**Tips**:  Please select `Problem` and `Solver` first to display the correct `Parameter`.
 
 insert picutre here
     + `Parameter`:  The `settings` for specific `Solver` would be shown in this frame, at least you choose `Problem` and `Solver` properly.
     insert picture here: you can modified settings_parameters for `Solver` directly in GUI. 
 
 - **Test Parameter**
+> 💡**Tips**:  Please select `Problem` and `Solver` first to display the correct `Method` and `Task`.
+
+insert picture here
+    + `Method`: Your selection of `Method` would be displayed here. 
+    + `Task`: Your selection of `Task` would be displayed here.
+    + `mode`: This is a dropdown menu to select the mode. The options are `Test` and `Training`, with `Test` being the default setting.
+    + `Batch_size`: The number of instances in a batch.
+    + `Episode`: The total number instances in an epsiode.
+    + `Decoder_Strategy`: The Decoder Strategy, which includes Greedy Search and Sampling, determines how the next token is selected from the decoder's output probability distribution to construct the final sequence, balancing between precision and diversity.
+    + `Datasets`: Click the `Dataset` button, select a file in the pop-up window, and the file's location will be displayed in the entry field. When conducting a `vary-scale` test, you can select an entire folder instead of a single file.
+    + `Checkpoint`: Click the `Checkpoint` button, select a file in the pop-up window, and the file's location will be displayed in the entry field.
+    + `Start`: Click the `Start` button to start the process.
+    + `Stop`: Click the `Stop` button to stop the process. > 💡**Tips**: Please click `Stop` button to terminate the last `Start` and reset settings before initiating the next `Start`.
+    + `Epoch`(only for training): The number of epoch for training process.
+    + `Curve`(only for training): Click the `Checkpoint` button, you can trace training process in visualized results.  There are three options available in the drop-down box: `loss score`, `score` and `eval_score`.
 
 - **Log File Output**
 
+insert picture here
+
+During the `Test` and `Training` processes, the terminal logs will be synchronously updated in the "Log File Output" area, facilitating process tracking.
+
+
 - **Summary Output**
 
+insert picture here
 
+Detailed parameter information will be displayed in the "Summary Output" section, where you can verify whether your parameters are set correctly.
+    +`cfg`: you can refer the parameter in `configs.yaml`.
+    +`settings`: you can refer the parameter in `xxx_settins.yaml`.
 
-## Instructions
+## Instructions for Quick Start
+
+insert picture here
+    [1] Connect the remote Server first. When a successful connection to the remote server is established, you can view the prompt message in the `Log File Output` section.
+    [2] Choose the `Problem` you want to solve in `Problem` section. tick the box when you want select `vary-scale` or `vary-capacity` function. (💡 left: min value, right: max value)
+    [3] Choose the `Solver` you want to apply in `Solver` section. 
+    [4] You can customize parameter settings in the "Parameter" section; alternatively, you can leave the default settings intact without making any adjustments.
+    [5] modify `Test Parameter` or `Training Parameter` carefully. make sure the location of `datasets` and `checkpoint` is correct.
+    [6] click `start` button to start process.
+    [7] clicl `stop` process to terminate process.
