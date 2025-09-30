@@ -11,8 +11,10 @@ Graphical User Interface (GUI)
 - **Menu Bar**
 
 ![GUI_Menubar](../_static/Menubar.png "GUI_Menubar")
-    **[`github`](https://github.com/changliang5811/EasyNCO)**: Redirects to the `EasyCO` GitHub repository.
-    **`documention`**:  Redirects to the `EasyCO` documentation page for user guides and references.
+    
+**[`github`](https://github.com/changliang5811/EasyNCO)**: Redirects to the `EasyCO` GitHub repository.
+
+**`documention`**:  Redirects to the `EasyCO` documentation page for user guides and references.
 
 - **Server Setup**
 
@@ -91,10 +93,10 @@ During the `Test` and `Training` processes, the terminal logs will be synchronou
 
 <img src="../_static/train_frame.png" alt="GUI_TrainFrame" title="TrainFrame" width="800">
 
-[1] Connect the remote Server first. When a successful connection to the remote server is established, you can view the prompt message in the `Log File Output` section.
-[2] Choose the `Problem` you want to solve in `Problem` section. tick the box when you want select `vary-scale` or `vary-capacity` function. (💡 left: min value, right: max value)
-[3] Choose the `Solver` you want to apply in `Solver` section. 
-[4] You can customize parameter settings in the "Parameter" section; alternatively, you can leave the default settings intact without making any adjustments.
-[5] modify `Test Parameter` or `Training Parameter` carefully. make sure the location of `datasets` and `checkpoint` is correct.
-[6] click `start` button to start process.
-[7] clicl `stop` process to terminate process.
+1. Connect the remote Server first. When a successful connection to the remote server is established, you can view the prompt message in the `Log File Output` section.
+2. Choose the `Problem` you want to solve in `Problem` section. tick the box when you want select `vary-scale` or `vary-capacity` function. (💡 left: min value, right: max value)
+3. Choose the `Solver` you want to apply in `Solver` section. 
+4. You can customize parameter settings in the "Parameter" section; alternatively, you can leave the default settings intact without making any adjustments.
+5. modify `Test Parameter` or `Training Parameter` carefully. make sure the location of `datasets` and `checkpoint` is correct.
+6. click `start` button to start process.
+7. click `stop` process to terminate process.

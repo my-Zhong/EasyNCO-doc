@@ -38,7 +38,6 @@ class ARInitialization(Initialization):
             phase: Literal["train", "eval"],
             **kwargs,
     ) -> Tuple[TensorDict, Any]:
-
         if phase == "train":
             self.policy.train()
             env.load_problems(batch, batch.size(0))
@@ -53,40 +52,30 @@ class ARInitialization(Initialization):
                 env.aug_factor, batch.size(0), env.pomo_size
             )
             # shape: (augmentation, batch, pomo)
-
             max_pomo_reward, _ = aug_reward.max(dim=2)  # best result from pomo
             # shape: (augmentation, batch)
-
             no_aug_reward = (
                 -max_pomo_reward[0, :].float().mean()
             )  # negative sign to make positive value
-
             max_aug_pomo_reward, _ = max_pomo_reward.max(dim=0)  # get best result from augmentation
             # shape (batch, )
             aug_score = (
                 -max_aug_pomo_reward.float().mean()
             )  # negative sign to make positive value
-
             out = {
                 "no_aug_score": no_aug_reward,
                 "aug_score": aug_score,
             }
-
         return state_td, out
-
     def play_episode(
         self,
         env,
         decoder_strategy: str = "sampling",
     ) -> Tuple[TensorDict, dict]:
-
         reset_td = env.reset()
-
         self.policy.set_decoder_strategy(decoder_strategy)
         self.policy.pre_forward(reset_td)
-
         likelihood = torch.zeros(size=(env.batch_size[0], env.pomo_size, 0))
-
         done = False
         reward = None
         state_td = env.pre_step()
@@ -95,16 +84,13 @@ class ARInitialization(Initialization):
             prob = next_td["prob"]
             state_td = env.step(next_td)
             likelihood = torch.cat((likelihood, prob[:, :, None]), dim=2)
-
             reward = state_td["reward"]
             done = state_td["done"].all()
-
         policy_out = {
             "reward": reward,
             "likelihood": likelihood,
         }
         return state_td, policy_out
-
 </code></pre> 
 </details>
 
@@ -141,9 +127,8 @@ Methods that require iteration must implement their own iteration logic by inher
 The class `NoIteration` is a concrete implementation of `Iteration`. It is used when no additional iterative steps are needed. This class simply returns the output from the initialization stage without making any modifications.
 
 <details> 
-    <summary>Expand to view code of class ARInitialization</summary>
+    <summary>Expand to view code of class NoIteration</summary>
     <pre><code>
-
     class NoIteration(Iteration):
         def run(self,
                 td: TensorDict,

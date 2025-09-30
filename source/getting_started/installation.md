@@ -5,14 +5,14 @@ We recommend using **PyTorch 2.x** for better GPU memory utilization and trainin
 Please configure the Python environment according to the following steps.
 Please install `torch` first, then install the other dependent packages, finally install `torch-geomatic`.
 
-1. `torch`
+1. install `torch`
 
 The torch version we have installed is 2.0.1, the official instructions to install torch 2.0.1 are as follows:
 ```python
 pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2
 ```
 
-2. other dependent packages
+2. install other dependent packages
 
 Then you can install them using the following command
 ```python
@@ -43,15 +43,20 @@ networkx
 paramiko==2.8.0
 ```
 
-3. `torch-geomatic`
+3. install `torch-geomatic`
 
-Finally, you can install torch-geomatic (a version of 2.5.1 in EasyNCO) via the official documentation:
+Finally, you can install torch-geomatic (a version of 2.5.1 in EasyCO) via the official documentation:
 https://pytorch-geometric.readthedocs.io/en/2.5.1/install/installation.html
 ```python
 pip install torch_geometric==2.5.1
 pip install pyg_lib==0.3.1 torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.0.0+cu117.html
 ```
-Note that the version of pyg_lib must be 0.3.1 for prevent the error of 
-```python
-Encountered error: `/lib/x86_64-linux-gnu/libm.so.6: version `GLIBC_2.29' not found 
-```
+
+> Note that the version of pyg_lib must be 0.3.1 for prevent the error of 
+> ```python
+> Encountered error: `/lib/x86_64-linux-gnu/libm.so.6: version `GLIBC_2.29' not found
+> ```
+> You can specify the version using the command line below.
+> ```python
+> pip install pyg_lib==0.3.1 torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.0.0+cu117.html
+> ```

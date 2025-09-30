@@ -1,9 +1,8 @@
 Welcome to EasyNCO's documentation!
 ======================================
 
-😀欢迎界面
-
-平台大致介绍
+EasyCO is a learning-driven platform for solving Combinatorial Optimization (CO) problems. We aim to provide the CO community with solvers that are easy-to-use, flexible, and broadly
+applicable.
 
 pipline:
 
@@ -17,15 +16,27 @@ pipline:
 🚀Features
 --------------
 
-- 1
-- 2
-- 3
+- Extensive Coverage: EasyCO supports the solution generation for 55 common CO problems. This broad coverage is complemented by a comprehensive suite of benchmark datasets to facilitate fair and robust comparisons. To the best of our knowledge, EasyCO is the first platform to achieve coverage of over 50 problems.
+- Flexible Composition: EasyCO is built upon a unified optimization pipeline, where each neural solver is decomposed into interchangeable modules. This modular framework allows the flexible composition of components from different solvers, thereby facilitating the rapid development of novel and tailored solutions.
+- Intuitive GUI: We provide a user-friendly Graphical User Interface (GUI) that enables a full code-free workflow from experimental design to result analysis. This significantly lowers the technical barrier and accelerates the research process.
 
 🎉Supported methods
 ----------------------
 
-EasyNCO supports the following methods:
+The diverse initializations and iterations in our EasyCO:
++-------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Category          | Solvers                                                                                                                                     |
++===================+=============================================================================================================================================+
+| Classical Solvers | LKH-3, Concorde, HGS, EAX, PyVRP, OR-Tools.                                                                                                 |
++-------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Initialization    | Ptr-Nets, AM, POMO, ELG, ICAM, INViT, Omni_VRP, H-TSP, Pointerformer, DPN, MatNet, LEHD-Greedy, DIFUSCO-Greedy, T2T-Greedy, Fast-T2T-Greedy |
++-------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Iteration         | GLOP, UDC, DeepACO, LIH, DACT, NLNS, LEHD-RRC, DIFUSCO-2-OPT, T2T-2-OPT, Fast-T2T-OPT                                                       |
++-------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+|                   | MT-POMO, MVMoE, CaDA                                                                                                                        |
++-------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
+EasyNCO supports the following NCO methods:
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------+
 | Methods         | Paper title                                                                                                                 |
 +=================+=============================================================================================================================+
