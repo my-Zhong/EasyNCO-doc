@@ -22,6 +22,8 @@ DeepACO is a general combinatorial optimization framework that combines graph ne
 **Methods:**
 
 + The ACO algorithm itself is an iterative algorithm, and when an ant constructs a feasible path based on heuristic measures, it corresponds to generating an initial solution.
++ The policy of this method is based on the ACO algorithm. Different problems are implemented by their respective `class ACO_{problem}`, and then integrated through `load_policy`.
++ The model is based on a **GNN** network, mainly used for predicting heuristic measures in ACO.
 
 
 
