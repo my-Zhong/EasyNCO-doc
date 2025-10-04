@@ -3,19 +3,29 @@
 DeepACO is a general combinatorial optimization framework that combines graph neural networks with ant colony optimization, using learned heuristics and neural-guided local search to find high-quality solutions.
 ![deepaco](../_static/deepaco.png)
 
+
 ## `DeepACOInitialization`
 
 **Bases:** `Initialization`
 
-**Parameters:**
+**Methods:**
+
++ In training mode, the ACO policy is executed to collect rewards and probabilities. 
++ In evaluation mode, multiple searches are performed based on the heuristic heatmap to output the solution scores.
+
+
 
 ## `DeepACOIteration`
 
 **Bases:** `Iteration`
 
-**Parameters:**
+**Methods:**
 
-## `ACO_{problem}`
++ The ACO algorithm itself is an iterative algorithm, and when an ant constructs a feasible path based on heuristic measures, it corresponds to generating an initial solution.
+
+
+
+### `ACO_{problem}`
 
 ```python
 class ACO_{problem}(
@@ -73,7 +83,7 @@ def load_policy(
 ```
 **Parameters:**
 
-## Backbone
+## Model
 DeepACO predicts the *heuristic information* of ACO using [GNN](../developer_doc/methods.md#gnn). In particular, [Transformer](../developer_doc/methods.md#transformer) has also been used in MKP.
 
 ```python
@@ -96,7 +106,6 @@ python train.py settings=deepaco_settings mode=train problem={problem} settings.
 python train.py settings=deepaco_settings mode=train problem=tsp
 python train.py settings=deepaco_settings mode=train problem=op settings.model.feats=2 settings.model.phe_net=True
 ```
-
 
 | problem | feats | edge_feats | phe_net | update_x |
 |:-----:|:-----:|:------:|:------:|:-----:|
