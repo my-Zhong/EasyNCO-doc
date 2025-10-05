@@ -2,19 +2,19 @@
 
 We recommend using **PyTorch 2.x** for better GPU memory utilization and training (testing) acceleration. 
 
-Please configure the Python environment according to the following steps.
-Please install `torch` first, then install the other dependent packages, finally install `torch-geomatic`.
+Please configure the Python environment according to the following steps:
+Install `torch` first, then install the other dependent packages, finally install `torch-geomatic`.
 
-1. install `torch`
+## 1. Install `torch`
 
-The torch version we have installed is 2.0.1, the official instructions to install torch 2.0.1 are as follows:
+The torch version we have installed is 2.0.1, the official instructions to install **torch 2.0.1** are as follows:
 ```python
 pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2
 ```
 
-2. install other dependent packages
+## 2. Install other dependent packages
 
-Then you can install them using the following command
+You can simply install other dependent packages using the following command
 ```python
 pip install -r requirements.txt
 ```
@@ -43,9 +43,9 @@ networkx
 paramiko==2.8.0
 ```
 
-3. install `torch-geomatic`
+## 3. Install `torch-geomatic`
 
-Finally, you can install torch-geomatic (a version of 2.5.1 in EasyCO) via the official documentation:
+Finally, you can install **torch-geomatic** (a version of **2.5.1** in EasyCO) via the official documentation:
 https://pytorch-geometric.readthedocs.io/en/2.5.1/install/installation.html
 ```python
 pip install torch_geometric==2.5.1

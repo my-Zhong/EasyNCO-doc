@@ -1,11 +1,11 @@
 # Quickstart
-The platform provides two primary usage modes to meet the needs of different types of users:
+The platform provides two main ways of usage to meet the needs of different types of users.
 
 ## 1. Graphical User Interface (GUI) Mode
 
 ### Features
 + Intuitive and user-friendly interface.
-+ Supports operations through menus, buttons, and drag-and-drop, without requiring code.
++ Supports operations through menus, buttons, and configuration panel, without requiring code.
 + Integrated workflows for common tasks such as **data upload**, **configuration management**, and **process monitoring**.
 + Suitable for **non-technical users** or **first-time users of the platform**.
 

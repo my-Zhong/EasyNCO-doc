@@ -1,4 +1,4 @@
-Welcome to EasyNCO's documentation!
+Welcome to EasyCO's documentation!
 ======================================
 
 **EasyCO** is a learning-driven platform for solving Combinatorial Optimization (CO) problems. We aim to provide the CO community with solvers that are easy-to-use, flexible, and broadly
@@ -25,7 +25,7 @@ pipline:
 
 The diverse initializations and iterations in our EasyCO:
 
-.. list-table:: EasyCO: Diverse Initializations and Iterations
+.. list-table:: Diverse Initializations and Iterations
    :header-rows: 1
    :widths: 20 80
 
@@ -39,16 +39,16 @@ The diverse initializations and iterations in our EasyCO:
      - GLOP, UDC, DeepACO, LIH, DACT, NLNS, LEHD-RRC, DIFUSCO-2-OPT, T2T-2-OPT, Fast-T2T-OPT, MT-POMO, MVMoE, CaDA
 
 
-EasyNCO supports the following NCO methods:
+EasyCO supports the following NCO methods:
 
-.. list-table:: EasyNCO: Supported NCO Methods
+.. list-table:: Supported NCO Methods
    :header-rows: 1
    :widths: 15 85
 
    * - Methods
      - Paper title
    * - AM
-     - Attention, Learn To Solve Routing Problems! (ICLR 2019)
+     - `Attention, Learn To Solve Routing Problems!<https://arxiv.org/pdf/1803.08475>`_ (ICLR 2019)
    * - POMO
      - POMO: Policy Optimization with Multiple Optima for Reinforcement Learning (NeurIPS 2020)
    * - LEHD
@@ -58,7 +58,7 @@ EasyNCO supports the following NCO methods:
    * - ELG
      - Towards Generalizable Neural Solvers for Vehicle Routing Problems via Ensemble with Transferrable Local Policy (IJCAI 2024)
    * - DeepACO
-     - DeepACO: Neural-enhanced Ant Systems for Combinatorial Optimization (NeurIPS 2023)
+     - `DeepACO: Neural-enhanced Ant Systems for Combinatorial Optimization<https://arxiv.org/pdf/2309.14032>`_ (NeurIPS 2023)
    * - NLNS
      - Neural large neighborhood search for routing problems (Artificial Intelligence, 2022)
 
@@ -73,17 +73,25 @@ EasyNCO supports the following NCO methods:
 🌟Supported tasks
 -------------------
 
-+----------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------------+
-| Problem Category           | Typical Problems                       | Description                                                                                              |
-+============================+========================================+==========================================================================================================+
-| Routing Problems           | TSP, ATSP, PCTSP, CVRP, OP, SOP        | Find one or more paths in a graph to minimize cost or maximize reward under constraints.                 |
-+----------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------------+
-| Scheduling Problems        | FFSP, RCPSP, SMTWTP                    | Assign start times or order to tasks under resource/time constraints to optimize goals.                  |
-+----------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------------+
-| Packing Problems           | KP, MKP, BPP                           | Select items under capacity limits to maximize value or minimize container usage.                        |
-+----------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------------+
-| Other Graph Problems       | MIS                                    | Match items or select subsets under structural constraints to optimize objective.                        |
-+----------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------------+
+.. list-table:: Supported Tasks
+   :header-rows: 1
+   :widths: 20 30 50
+
+   * - Problem Category
+     - Typical Problems
+     - Description
+   * - Routing Problems
+     - TSP, ATSP, PCTSP, CVRP, OP, SOP
+     - Find one or more paths in a graph to minimize cost or maximize reward under constraints.
+   * - Scheduling Problems
+     - FFSP, RCPSP, SMTWTP
+     - Assign start times or order to tasks under resource/time constraints to optimize goals.
+   * - Packing Problems
+     - KP, MKP, BPP
+     - Select items under capacity limits to maximize value or minimize container usage.
+   * - Other Graph Problems
+     - MIS
+     - Match items or select subsets under structural constraints to optimize objective.
 
 
 .. note::
@@ -103,22 +111,17 @@ EasyNCO supports the following NCO methods:
     getting_started/online_demo
     getting_started/gui
 
-.. toctree::
-    :maxdepth: 1
-    :caption: Overview
-
-    overview/introduction
-    overview/platform_structure
 
 .. toctree::
     :maxdepth: 1
     :caption: Developer Documentation
 
-    developer_doc/setting
+    developer_doc/overview
     developer_doc/data
     developer_doc/exact_solvers
-    developer_doc/methods
+    developer_doc/neural_solvers
     developer_doc/phases
+    developer_doc/setting
 
 .. toctree::
     :maxdepth: 1
