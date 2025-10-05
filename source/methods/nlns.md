@@ -2,6 +2,38 @@
 
 Neural Large Neighborhood Search (NLNS) is based on the Large Neighborhood Search (LNS) framework, where solutions are improved by repeatedly destroying and repairing parts of them. The repair step, which is more complex, is handled by a deep neural network trained with policy gradient reinforcement learning.
 
+## `NLNSInitialization`
+
+**Bases:** `Initialization`
+
+**Parameters:**
+
++ `env`: `torchrl.envs.EnvBase`: the environment containing the problems to be solved.
++ `batch`: Batch size, used to load multiple VRP instances.
++ `strategy`: A string indicating the strategy (used for labeling purposes, not affecting the greedy initialization).
++ `phase`: "train" or "eval", specifies whether the run is in training or evaluation mode.
+
+**Methods:**
++ 
+
+### ``
+
+A helper class that generates initial solutions using a **greedy** heuristic.
+
+## `NLNSIteration`
+
+**Bases:** `Iteration`
+
+**Parameters:**
+
+
+## `NLNSPolicy`
+
+
+
+
+
+## Model
 
 
 ## Usage

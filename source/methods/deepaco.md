@@ -1,8 +1,8 @@
 # DeepACO
 
 DeepACO is a general combinatorial optimization framework that combines graph neural networks with ant colony optimization, using learned heuristics and neural-guided local search to find high-quality solutions.
-![deepaco](../_static/deepaco.png)
 
+<img src="../_static/deepaco.png" alt="deepaco" width="400">
 
 ## `DeepACOInitialization`
 
