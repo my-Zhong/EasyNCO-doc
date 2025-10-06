@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Maximum Independent Set (MIS) problem seeks the largest set of vertices in an undirected graph such that no two vertices in the subset are connected by an edge.
+The **Maximum Independent Set (MIS) problem** seeks the largest set of vertices in an undirected graph such that no two vertices in the subset are connected by an edge.
 
 
 ### Problem Description

@@ -1,8 +1,7 @@
-
 # Knapsack Problem
 
 ## Introduction
-The Knapsack Problem (KP) is a classic combinatorial optimization problem where the goal is to select a subset of items with maximum total value, without exceeding a given weight capacity constraint.
+The **Knapsack Problem (KP)** is a classic combinatorial optimization problem where the goal is to select a subset of items with maximum total value, without exceeding a given weight capacity constraint.
 
 ### Problem Description
 - **Entities**
@@ -27,22 +26,39 @@ This module mainly provides a function `def KPGenerator()`, which is used to gen
 + Load custom data from a given file (`class customized_kp_loader(Dataset)`).
 
 ### Random Data Generator
-**`class random_kp_generator()`**
 
+```python
+class random_kp_generator(
+  num_sample, 
+  num_items, 
+  device
+  )
+```
 
-**Attributes:**
+**Bases:** `Dataset`
+
+**Parameters:**
 + `num_sample`(`int`): number of samples in the dataset
 + `num_items`(`int`):  number of items in a instance
 + `device`(`str`): device to store the data (CPU/GPU)
 
-
-**Function:**
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, idx) -> tensor`: randomly generates a tensor of shape `(num_items, 2)`, where the first column represents the weights of the items, and the second column represents the values of the items. Both weights values and are uniformly sampled from the range [0, 1]
-### Custom Data Loading
-**`class customized_kp_loader()`**
 
-**Attributes:**
+### Custom Data Loading
+
+```python
+class customized_kp_loader(
+  num_sample, 
+  num_items, 
+  device, 
+  path)
+```
+
+**Bases:** `Dataset`
+
+**Parameters:**
 + `num_sample`(`int`): number of instances in the dataset
 + `num_items`(`int`): number of items in a instance
 + `device`(`str`): device to store the data (CPU/GPU)
@@ -51,7 +67,6 @@ This module mainly provides a function `def KPGenerator()`, which is used to gen
 + `data`(`tensor`): the data is saved as a tensor with shape `(num_sample, num_items, 2)`
 > 💡**Tips**: It currently supports files in `.pt` (PyTorch tensor), `.pkl`(Python pickle) format.
 
-
-**Function:**
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, index) -> tensor`: loads data from the specified `index`.

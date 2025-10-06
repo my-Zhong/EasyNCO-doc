@@ -1,7 +1,8 @@
+# Capacitated Vehicle Routing Problem
+
 ## Introduction
 
-The Capacitated Vehicle Routing Problem (CVRP) seeks to find the optimal set of routes for a fleet of vehicles to serve a set of customers with known demands, minimizing total travel cost while respecting vehicle capacity constraints.
-
+The **Capacitated Vehicle Routing Problem (CVRP)** seeks to find the optimal set of routes for a fleet of vehicles to serve a set of customers with known demands, minimizing total travel cost while respecting vehicle capacity constraints.
 
 ### Problem Description
 
@@ -26,25 +27,44 @@ This module mainly provides a function `def CVRPGenerator()`, which is used to g
 + Load custom data from a given file (`class customized_vrp_loader(Dataset)`).
 
 ### Random Data Generator
-**`class random_vrp_generator()`**
 
+```python
+class random_vrp_generator(
+  num_sample, 
+  num_nodes, 
+  demand_scaler, 
+  device,
+  **kwargs
+  )
+```
 
-**Attributes:**
+**Bases:** `Dataset`
+
+**Parameters:**
 + `num_sample`(`int`): number of samples in the dataset
 + `num_nodes`(`int`): number of customers
 + `demand_scaler`(`int`): decide the range of demand
 + `device`(`str`): device to store the data (CPU/GPU)
 
-
-**Function:**
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, idx) -> tensor`: randomly generates a tensor of shape `(num_nodes + 1, 3)`, `1` represents the depot, where each demand in customers is sampled uniformly from `[1, 10]/demand_scaler` and the depot's demand is set to 0.
 
 
 ### Custom Data Loading
-**`class customized_vrp_loader()`**
 
-**Attributes:**
+```python
+class customized_vrp_loader(
+  num_sample, 
+  num_nodes, 
+  device, 
+  path
+  )
+```
+
+**Bases:** `Dataset`
+
+**Parameters:**
 + `num_sample`(`int`): number of samples in the dataset
 + `node`(`int`): number of customers
 + `data`(`dict`): the data should be saved in the format of {'depot_xy': shape `(num_sample, 1, 2)`,

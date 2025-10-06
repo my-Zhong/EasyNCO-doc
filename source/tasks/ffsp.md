@@ -2,8 +2,7 @@
 
 ## Introduction
 
-The Flexible Flow Shop Problem (FFSP) is an extension of the traditional Flow Shop Scheduling Problem (FSP) by allowing multiple parallel machines at each stage, with each operation assigned to one of them.
-
+The **Flexible Flow Shop Problem (FFSP)** is an extension of the traditional Flow Shop Scheduling Problem (FSP) by allowing multiple parallel machines at each stage, with each operation assigned to one of them.
 
 ### Problem Description
 
@@ -24,10 +23,21 @@ This module mainly provides a function `def FFSPGenerator()`, which is used to g
 + Load custom data from a given file (`class customized_ffsp_loader(Dataset)`).
 
 ### Random Data Generator
-**`class random_ffsp_generator()`**
 
+```python
+class random_ffsp_generator(
+        num_sample,
+        machine_cnt_list,
+        job_cnt,
+        time_low,
+        time_high,
+        device,
+    )
+```
 
-**Attributes:**
+**Bases:** `Dataset`
+
+**Parameters:**
 + `num_sample`(`int`): number of samples in the dataset
 + `machine_cnt_list`(`list`): list of machine counts per stage, e.g., `[4,4,4]` means 3 stages each with 4 machines
 + `job_cnt`(`int`): number of jobs
@@ -35,24 +45,30 @@ This module mainly provides a function `def FFSPGenerator()`, which is used to g
 + `time_high`(`int`): upper bound of processing time
 + `device`(`str`): device to store the data (CPU/GPU)
 
-
-**Function:**
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, idx) -> tensor`: randomly generates a tensor of shape `(job_cnt, total_machines)`, where each element is a processing time sampled uniformly from `[time_low, time_high]`
 
 
 ### Custom Data Loading
-**`class customized_ffsp_loader()`**
 
-**Attributes:**
+```python
+class customized_ffsp_loader(
+  num_sample, 
+  device, 
+  path)
+```
+
+**Bases:** `Dataset`
+
+**Parameters:**
 + `num_sample`(`int`): number of samples in the dataset
 + `device`(`str`): device to store the data (CPU/GPU)
 + `path`(`str`): the specified path of custom data
 + `file_type`(`str`): the file type
 > 💡**Tips**: It currently supports files in `.pt` (PyTorch tensor) format.
 
-
-**Function:**
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, index) -> tensor`: loads data from the specified `index`.
 
