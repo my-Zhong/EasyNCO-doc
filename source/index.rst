@@ -48,7 +48,7 @@ EasyCO supports the following NCO methods:
    * - Methods
      - Paper title
    * - AM
-     - `Attention, Learn To Solve Routing Problems!<https://arxiv.org/pdf/1803.08475>`_ (ICLR 2019)
+     - `Attention, Learn To Solve Routing Problems! <https://arxiv.org/pdf/1803.08475>`_ (ICLR 2019)
    * - POMO
      - POMO: Policy Optimization with Multiple Optima for Reinforcement Learning (NeurIPS 2020)
    * - LEHD
@@ -58,7 +58,7 @@ EasyCO supports the following NCO methods:
    * - ELG
      - Towards Generalizable Neural Solvers for Vehicle Routing Problems via Ensemble with Transferrable Local Policy (IJCAI 2024)
    * - DeepACO
-     - `DeepACO: Neural-enhanced Ant Systems for Combinatorial Optimization<https://arxiv.org/pdf/2309.14032>`_ (NeurIPS 2023)
+     - `DeepACO: Neural-enhanced Ant Systems for Combinatorial Optimization <https://arxiv.org/pdf/2309.14032>`_ (NeurIPS 2023)
    * - NLNS
      - Neural large neighborhood search for routing problems (Artificial Intelligence, 2022)
 
