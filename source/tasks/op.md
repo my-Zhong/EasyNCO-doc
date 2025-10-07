@@ -1,8 +1,8 @@
-# Orienteering Problem (OP)
+# Orienteering Problem
 
 ## Introduction
 
-The Prize-Collecting Orienteering Problem (OP) aims to identify the optimal route for a vehicle to maximize the total collected prize while not exceeding a given travel cost limit. The vehicle starts and ends at a depot, and each customer has a specific prize and a travel cost associated with visiting it.
+The Prize-Collecting **Orienteering Problem (OP)** aims to identify the optimal route for a vehicle to maximize the total collected prize while not exceeding a given travel cost limit. The vehicle starts and ends at a depot, and each customer has a specific prize and a travel cost associated with visiting it.
 
 ### Problem Description
 
@@ -25,19 +25,38 @@ This module mainly provides a function `def OPGenerator()`, which is used to gen
 + Load custom data from a given file (`class customized_op_loader()`).
 
 ### Random Data Generator
-**`class random_op_generator()`**
+
+```python
+class random_op_generator(
+  num_sample, 
+  num_nodes, 
+  device
+  )
+```
+
+**Bases:** `Dataset`
 
 **Attributes:**
 + `num_sample`(`int`): number of samples in the dataset
 + `num_nodes`(`int`): number of customers
 + `device`(`str`): device to store the data (CPU/GPU)
 
-**Function:**
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, index) -> tensor`: randomly generates a tensor of shape `(num_nodes, 3)`. Each customer's coordinates are sampled uniformly from `[0, 1]`, and the prize is calculated based on the distance from the depot. The depot is included as the first node.
 
 ### Custom Data Loading
-**`class customized_op_loader()`**
+
+```python
+class customized_op_loader(
+  num_sample, 
+  num_nodes, 
+  device, 
+  path
+  )
+```
+
+**Bases:** `Dataset`
 
 **Attributes:**
 + `num_sample`(`int`): number of samples in the dataset
@@ -47,6 +66,6 @@ This module mainly provides a function `def OPGenerator()`, which is used to gen
 + `file_type`(`str`): the file type
 > 💡**Tips**: It currently supports files in `.pt` (PyTorch tensor), `.pkl`(Python pickle) format.
 
-**Function:**
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, index) -> tensor`: loads data from the specified `index`. The prize is calculated based on the distance from the depot for each customer.

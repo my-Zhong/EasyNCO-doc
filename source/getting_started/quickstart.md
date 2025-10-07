@@ -55,7 +55,7 @@ After configuration is complete, execute the appropriate Python script from the 
 + Model testing: `python eval.py` will load the specified configuration and run the evaluation pipeline.
 + Model training: `python train.py` will launch the full training workflow and save model checkpoints according to the settings
 
-💡Note: If you prefer not to modify the parameters in the `YAML file`, you can also set them directly from the command line, for example:
+💡Note: If you prefer not to modify the parameters in the `YAML` file, you can also set them directly from the command line, for example:
 ```python
 python train.py \
     settings=... \

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Resource-Constrained Project Scheduling Problem (RCPSP) is a classical model in project scheduling, where tasks are subject to precedence constraints and limited resources. The goal is to schedule the project while satisfying both resource limitations and task dependencies, typically to optimize the project duration.
+**Resource-Constrained Project Scheduling Problem (RCPSP)** is a classical model in project scheduling, where tasks are subject to precedence constraints and limited resources. The goal is to schedule the project while satisfying both resource limitations and task dependencies, typically to optimize the project duration.
 
 ## Problem Description
 - **Entities**
@@ -23,21 +23,29 @@ This module mainly provides a function `def RCPSPGenerator()`, which is used to 
 
 
 ### Random Data Generation
-This part is marked as *TODO* and will be implemented in a future update.
+> This part is marked as *TODO* and will be implemented in a future update.
 
 ### Custom Data Loading
-**`class customized_rcpsp_loader()`**
+
+```python
+class customized_rcpsp_loader(
+  num_sample, 
+  num_nodes, 
+  device, 
+  path
+  )
+```
+
+**Bases:** `Dataset`
 
 **Attributes:**
-
 + `num_sample`(`int`): Number of samples to load.
 + `num_nodes`(`int`): Number of nodes (jobs) in each project instance.
 + `device`(`str`, optional): Device to load tensors on ('cpu' or 'cuda'). Default is 'cpu'.
 + `path`(`str`, optional): Path to the directory containing `.RCP` files.
 > 💡**Tips**: It currently supports files in `.RCP` format, which follow a standard format as used in PSPLIB instances.
 
-**Function:**
-
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, index) -> tensor`: loads data from the specified `index`.
 + `def readints(f) -> List[int]`: Reads a line from a file `f` and parses it into a list of integers.

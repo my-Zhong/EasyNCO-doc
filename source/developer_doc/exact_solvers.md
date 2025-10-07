@@ -1,30 +1,35 @@
 # Exact Solvers
-The traditional heuristic solvers currently include five exact solvers: LKH, HGS, EAX, Concorde, and OR-Tools.
+The traditional heuristic solvers currently include five exact solvers: 
++ **LKH**
++ **HGS**
++ **EAX**
++ **Concorde**
++ **OR-Tools**
 
-## File introduction
+## File Introduction
 
-+ `exact_solver_main.py:` Example usage, how to call a function
-+ `param_setting.py:` Set parameters, such as LKH's "max_trials"
-+ `solution.py:` Export the results of each solver in the format of (tour, cost)
-+ `HGS_C.py` \ `LKH_CVRP.py` \ `LKH_TSP.py` \ `LKH_ATSP.py` \ `ortool_tsp.py` \ `ortool_cvrp.py ` \ `pyconcorde_run.py` \ `EAX.py` : Call interfaces for each solver, including auto-make function, call functions for data-loader, call functions for problem nodes
++ `exact_solver_main.py`: Example usage, how to call a function.
++ `param_setting.py`: Set parameters, such as LKH's *"max_trials"*.
++ `solution.py`: Export the results of each solver in the format of (tour, cost).
++ `HGS_C.py` \ `LKH_CVRP.py` \ `LKH_TSP.py` \ `LKH_ATSP.py` \ `ortool_tsp.py` \ `ortool_cvrp.py ` \ `pyconcorde_run.py` \ `EAX.py` : Call interfaces for each solver, including **auto-make function**, **call functions for data-loader**, **call functions for problem nodes**.
 
-## Solvers intruduction and Required Settings
-## LKH
-+ *LKH* : LKH (Lin-Kernighan-Helsgaun) is a high-performance heuristic algorithm specifically designed for solving the Traveling Salesman Problem (TSP) and its variants, employing dynamic λ-opt exchanges and candidate set strategies to obtain near-optimal solutions efficiently.
+## Solvers Intruduction
+
++ **LKH**: LKH (Lin-Kernighan-Helsgaun) is a high-performance heuristic algorithm specifically designed for solving the Traveling Salesman Problem (TSP) and its variants, employing dynamic λ-opt exchanges and candidate set strategies to obtain near-optimal solutions efficiently.
   + `MAX_TRIALS`(`int`): The number of iterations for LKH
   + `RUNS`(`int`): The number of times a problem is run
   + `TRACE_LEVEL`(`int`): Log information
   + `SEED`(`int`): Generate seeds for random numbers
-+ *HGS* : HGS is a state-of-the-art VRP solver integrating genetic algorithms and adaptive large neighborhood search.
++ **HGS** : HGS is a state-of-the-art VRP solver integrating genetic algorithms and adaptive large neighborhood search.
   + `time_threshold`(`int`): The running time of an instance solved by HGS
-+ *EAX* : EAX is a genetic algorithm operator for TSP that performs edge recombination to escape local optima.
++ **EAX** : EAX is a genetic algorithm operator for TSP that performs edge recombination to escape local optima.
   + `population_size`(`int`): The count of candidate solutions maintained per generational iteration
   + `max_iterations`(`int`): The number of iterations for EAX 
-+ *OR-Tools* :OR-Tools is Google's open-source optimization toolkit for constraint programming and heuristic search.
++ **OR-Tools** :OR-Tools is Google's open-source optimization toolkit for constraint programming and heuristic search.
   + `num_vehicles`(`int`): only for CVRP, number of vehicles
-+ *Concorde* : Concorde is the state-of-the-art exact TSP solver using branch-and-cut methods.
-## Reference
++ **Concorde** : Concorde is the state-of-the-art exact TSP solver using branch-and-cut methods.
 
+**Reference**
 
 |  Solver  |                                                                                   Paper Title                                                                                    |                   code                    |
 |:--------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------:|
@@ -33,7 +38,6 @@ The traditional heuristic solvers currently include five exact solvers: LKH, HGS
 |   HGS    |              Vidal T. Hybrid genetic search for the CVRP: Open-source implementation and SWAP* neighborhood[J]. Computers & Operations Research, 2022, 140: 105643.              |    https://github.com/vidalt/HGS-CVRP     |
 | OR-Tools |                                                       https://ai.googleblog.com/2019/09/or-tools-now-supports-integer.html                                                       |                     \                     |
 | Concorde |    Applegate, David, Ribert Bixby, Vasek Chvatal, and William Cook. Concorde TSP solver. 2006.                                                                                                                                                                              |  https://github.com/jvkersch/pyconcorde   |
-
 
 ## Parameter Setting
 In the `param_setting.py`, we classify all parameters to three types, solver setting, problem setting and working setting.
@@ -69,7 +73,7 @@ cost: xxx
 time: xxx s  
 LKH3/HGS settings:
 ```
-## Start
+## Usage
 **Using instruction**
 
 - Referring to "exact_solver_main.py"
@@ -103,14 +107,13 @@ result = lkh_solver_tsp_multiprocess(data_loader, opts)
 ```
 + The results will be stored in "exact_solver/result_lkh_tsp", the executable will be stored in "exact_solver/use_exe/lkh"
 
-## You should know
-+ 1.Auto-make of all solvers are compatible with Linux system. We recommend using a Linux system.
-+ 在 Linux 系统上安装 git
+## Tips
+1. Auto-make of all solvers are compatible with Linux system. We recommend using a Linux system. And, install Git on a Linux system
 ```bash
 sudo apt-get update
 sudo apt-get install git
 ```
-+ 2.The following problems may occur in Auto-make of concorde: 
+2. The following problems may occur in Auto-make of concorde: 
 ```python
 ssl.sslCertverificationError: [SSL: CERTIFICATE VERIFY FALED] certificate verify failed: unable to get local issuer certificate ( ssl.c:135)
 ```
@@ -119,16 +122,16 @@ Now we need to add the following code at the beginning of 'setup. py' in PyConco
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 ```
-+ 3.HGS solver in Windows system: Manually make rather than auto-make
-  + (1)make: download mingw referring to 
+3. HGS solver in Windows system: Manually make rather than auto-make
++ (1) make: download mingw referring to 
     ```  
     https://sourceforge.net/projects/mingw
     ```  
-  + (2)cmake: download cmake referring to
++ (2) cmake: download cmake referring to
     ```
     https://cmake.org/download/
     ```
-  + (3)Run the following command:
++ (3) Run the following command:
     ```bash
     mkdir build
     cd build

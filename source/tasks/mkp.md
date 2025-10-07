@@ -2,7 +2,7 @@
 # Multiple Knapsack Problem 
 
 ## Introduction
-The Multiple Knapsack Problem (MKP) is a generalization of the classic Knapsack Problem, where the goal is to distribute a set of items into multiple knapsacks, each with its own capacity constraint, to maximize the total value of the items assigned.
+The **Multiple Knapsack Problem (MKP)** is a generalization of the classic Knapsack Problem, where the goal is to distribute a set of items into multiple knapsacks, each with its own capacity constraint, to maximize the total value of the items assigned.
 
 ### Problem Description
 - **Entities**
@@ -12,7 +12,6 @@ The Multiple Knapsack Problem (MKP) is a generalization of the classic Knapsack 
 - **Constraints** 
   - The sum of the weights of the items assigned to each knapsack must not exceed its capacity.
   - Each item can be assigned to at most one knapsack. 
-
 
 - **Objective**
   - Maximize the total value of the items assigned to all knapsacks.
@@ -27,8 +26,15 @@ This module mainly provides a function `def MKPGenerator()`, which is used to ge
 + Load custom data from a given file (`class customized_mkp_loader(Dataset)`).
 
 ### Random Data Generator
-**`class random_mkp_generator()`**
+```python
+class random_mkp_generator(
+  num_sample, 
+  num_nodes, 
+  device
+  )
+```
 
+**Bases:** `Dataset`
 
 **Attributes:**
 + `num_sample`(`int`): number of samples in the dataset
@@ -36,11 +42,22 @@ This module mainly provides a function `def MKPGenerator()`, which is used to ge
 + `device`(`str`): device to store the data (CPU/GPU)
 + `constraints`(`int`): number of constraints
 
-**Function:**
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, idx) -> tensor`: randomly generates a tensor of shape `(num_items, 1+constraints)`,where the first column represents the prizes for each knapsack and the remaining columns represent the normalized weights for each constraint.
+
 ### Custom Data Loading
-**`class customized_kp_loader()`**
+
+```python
+class customized_mkp_loader(
+  num_sample, 
+  num_nodes, 
+  device, 
+  path
+  )
+```
+
+**Bases:** `Dataset`
 
 **Attributes:**
 + `num_sample`(`int`): number of samples in the dataset
@@ -51,7 +68,6 @@ This module mainly provides a function `def MKPGenerator()`, which is used to ge
 + `data`(`tensor`): the data is saved as a tensor with shape `(num_sample, num_nodes, 1+constraints)`
 > 💡**Tips**: It currently supports files in `.pt` (PyTorch tensor), `.pkl`(Python pickle) format.
 
-
-**Function:**
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, index) -> tensor`: loads data from the specified `index`

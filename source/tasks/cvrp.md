@@ -40,7 +40,7 @@ class random_vrp_generator(
 
 **Bases:** `Dataset`
 
-**Parameters:**
+**Attributes:**
 + `num_sample`(`int`): number of samples in the dataset
 + `num_nodes`(`int`): number of customers
 + `demand_scaler`(`int`): decide the range of demand
@@ -64,7 +64,7 @@ class customized_vrp_loader(
 
 **Bases:** `Dataset`
 
-**Parameters:**
+**Attributes:**
 + `num_sample`(`int`): number of samples in the dataset
 + `node`(`int`): number of customers
 + `data`(`dict`): the data should be saved in the format of {'depot_xy': shape `(num_sample, 1, 2)`,
@@ -76,7 +76,6 @@ class customized_vrp_loader(
 + `file_type`(`str`): the file type
 > 💡**Tips**: It currently supports files in `.pt` (PyTorch tensor), `.pkl`(Python pickle) format.
 
-
-**Function:**
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, index) -> tensor`: loads data from the specified `index`.

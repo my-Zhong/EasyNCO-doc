@@ -1,9 +1,8 @@
-
-# Sequential Ordering Problem (SOP)
+# Sequential Ordering Problem
 
 ## Introduction
 
-The Sequential Ordering Problem (SOP) involves finding a route that starts and ends at a depot, visiting a set of customers in a specific sequence to minimize the total travel cost while satisfying precedence constraints.
+The **Sequential Ordering Problem (SOP)** involves finding a route that starts and ends at a depot, visiting a set of customers in a specific sequence to minimize the total travel cost while satisfying precedence constraints.
 
 ### Problem Description
 
@@ -26,19 +25,38 @@ This module mainly provides a function `def SOPGenerator()`, which is used to ge
 + Load custom data from a given file (`class customized_sop_loader()`).
 
 ### Random Data Generator
-**`class random_sop_generator()`**
+
+```python
+class random_sop_generator(
+  num_sample, 
+  num_nodes, 
+  device
+  )
+```
+
+**Bases:** `Dataset`
 
 **Attributes:**
 + `num_sample`(`int`): number of samples in the dataset
 + `num_nodes`(`int`): number of customers
 + `device`(`str`): device to store the data (CPU/GPU)
 
-**Function:**
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, index) -> tensor`: randomly generates a tensor that includes distance matrix and adjacency matrix. Distance matrix represents the travel cost between locations, and adjacency matrix represents the precedence constraints.
 
 ### Custom Data Loading
-**`class customized_sop_loader()`**
+
+```python
+class customized_sop_loader(
+  num_sample, 
+  num_nodes, 
+  device, 
+  path
+  )
+```
+
+**Bases:** `Dataset`
 
 **Attributes:**
 + `num_sample`(`int`): number of samples in the dataset
@@ -48,6 +66,6 @@ This module mainly provides a function `def SOPGenerator()`, which is used to ge
 + `file_type`(`str`): the file type
 > 💡**Tips**: It currently supports files in `.pt` (PyTorch tensor), `.pkl`(Python pickle) format.
 
-**Function:**
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, index) -> tensor`: loads data from the specified `index`. The data includes distance matrix and adjacency matrix.

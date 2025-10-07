@@ -4,7 +4,6 @@
 
 The **Maximum Independent Set (MIS) problem** seeks the largest set of vertices in an undirected graph such that no two vertices in the subset are connected by an edge.
 
-
 ### Problem Description
 
 - **Entities**
@@ -25,11 +24,21 @@ This module mainly provides a function `def MISGenerator()`, which is used to ge
 + Load custom data from a given file (`class cutomized_mis_loader(Dataset)`).
 
 ### Random Data Generator
-**`Random generation for MIS is not supported currently`**
+> **Random generation for MIS is not supported currently**
 
 
 ### Custom Data Loading
-**`class customized_mis_loader()`**
+```python
+class cutomized_mis_loader(
+  num_sample, 
+  num_nodes, 
+  device, 
+  path, 
+  graph, 
+  **kwargs)
+```
+
+**Bases:** `Dataset`
 
 **Attributes:**
 + `num_sample`(`int`): number of samples in the dataset
@@ -40,8 +49,7 @@ This module mainly provides a function `def MISGenerator()`, which is used to ge
 + `graph`(`bool`): a flag to identify graph data files
 > 💡**Tips**: It currently supports files in `.pkl` (Pickle) format.
 
-
-**Function:**
+**Methods:**
 + `__len__(self) -> int`: returns the total number of samples
 + `__getitem__(self, index) -> tensor`: loads data from the specified `index`.
 

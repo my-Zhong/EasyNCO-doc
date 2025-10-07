@@ -52,7 +52,7 @@ pip install torch_geometric==2.5.1
 pip install pyg_lib==0.3.1 torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.0.0+cu117.html
 ```
 
-> Note that the version of pyg_lib must be 0.3.1 for prevent the error of 
+> Note that the version of **pyg_lib** must be **0.3.1** for prevent the error of 
 > ```python
 > Encountered error: `/lib/x86_64-linux-gnu/libm.so.6: version `GLIBC_2.29' not found
 > ```

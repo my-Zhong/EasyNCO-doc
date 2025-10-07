@@ -16,7 +16,7 @@ Please see individual problem descriptions for details.
 
 **Bases:** `Dataset`
 
-**Parameters:**
+**Attributes:**
 + `num_sample`: Number of samples in the dataset.
 + `num_nodes`: Scale of the problem instance.
 + `device`: Device to store the data (CPU/GPU).
@@ -29,7 +29,7 @@ Please see individual problem descriptions for details.
 
 **Bases:** `Dataset`
 
-**Parameters:**
+**Attributes:**
 + `num_sample`: Number of samples in the dataset.
 + `num_nodes`: Scale of the problem instance.
 + `device`: Device to store the data (CPU/GPU).

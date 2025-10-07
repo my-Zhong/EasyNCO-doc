@@ -28,22 +28,20 @@ A class to generate random Bin Packing Problem instances. Data is generated on-t
 
 ```python
 class random_bpp_generator(
-    num_sample,
-    num_nodes,
-    device
-    )
+  num_sample,
+  num_nodes,
+  device
+  )
 ```
 
 **Bases:** `Dataset`
 
-**Parameters:**
-
+**Attributes:**
 - `num_sample` (`int`): Number of samples in the dataset.
 - `num_nodes` (`int`): Number of items to be packed in each sample.
 - `device` (`str`): The device to store the data on (e.g., 'cpu'/'cuda').
 
 **Methods:**
-
 - `__len__(self) -> int`: Returns the total number of samples.
 - `__getitem__(self, idx) -> torch.Tensor`: Randomly generates a single problem instance. It returns a `torch.Tensor` of shape `(num_nodes + 1,)`. The first element is always 0, and the subsequent `num_nodes` elements represent item sizes, which are integers sampled uniformly from the range [20, 100].
 
@@ -53,17 +51,16 @@ A class to load BPP problem instances from a specified data file.
 
 ```python
 class customized_bpp_loader(
-    num_sample, 
-    num_nodes, 
-    device, 
-    path
-    )
+  num_sample, 
+  num_nodes, 
+  device, 
+  path
+  )
 ```
 
 **Bases:** `Dataset`
 
-**Parameters:**
-
+**Attributes:**
 - `num_sample` (`int`): The number of samples to use from the data file.
 - `num_nodes` (`int`): The number of items in each sample.
 - `device` (`str`): The device to store the data on.
@@ -72,6 +69,5 @@ class customized_bpp_loader(
 > 💡 **Tip**: It currently supports files in `.pt` (PyTorch tensor) and `.pkl` (Pickle) formats. The data within the file is expected to be a list or tensor of problem instances.
 
 **Methods:**
-
 - `__len__(self) -> int`: Returns the total number of samples.
 - `__getitem__(self, index) -> torch.Tensor`: Loads and returns a single data instance as a tensor from the file at the specified `index`.

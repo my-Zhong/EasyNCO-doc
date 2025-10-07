@@ -1,12 +1,11 @@
-# SMTWTP Problem and Data Generation
+# Single Machine Total Weighted Tardiness Problem
 
-## Introduction to the SMTWTP Problem
-The Single Machine Total Weighted Tardiness Problem(SMTWTP) is a scheduling problem that involves sequencing a set of jobs on a single machine to minimize the total weighted tardiness.
+## Introduction
+The **Single Machine Total Weighted Tardiness Problem(SMTWTP)** is a scheduling problem that involves sequencing a set of jobs on a single machine to minimize the total weighted tardiness.
 
 ### Problem Description
 
-
-- **Jobs with Attributes** : Each job  $J_i$ has a processing time $ p_i $, a due date $ d_i $, and a weight $ w_i $ representing its importance.
+- **Jobs with Attributes** : Each job  $J_i$ has a processing time $p_i$, a due date $d_i$, and a weight $w_i$ representing its importance.
 
 - **Single Machine**: All jobs must be processed non-preemptively on a single machine that can handle only one job at a time.
 
@@ -15,7 +14,7 @@ The Single Machine Total Weighted Tardiness Problem(SMTWTP) is a scheduling prob
 $$
 T_i = \max(0, C_i - d_i)
 $$
-where $ C_i $ is the completion time of job $ J_i $.
+where $C_i$ is the completion time of job $J_i$.
 
 - **Total Weighted Tardiness** : The total cost is the sum of weighted tardiness across all jobs:
 
@@ -32,19 +31,53 @@ $$
 - **Non-Preemptive Execution**: Once a job starts, it runs to completion without interruption.
 
 
-## Data Generation with SMTWTPGenerator.py
+## Data Generation
 The `SMTWTPGenerator.py` file provides a flexible way to generate data for the SMTWTP problem, supporting both random data generation and loading of customized data.
 
 ### Random Data Generation
 The `random_smtwtp_generator` class within `SMTWTPGenerator.py` is designed to create random SMTWTP data.
 
-- **`__init__`**: The class is initialized with parameters like the number of samples (`num_sample`), number of nodes (`num_nodes`), and the device (e.g., CPU or GPU).
+```python
+class random_smtwtp_generator(
+  num_sample, 
+  num_nodes, 
+  device
+  )
+```
 
+**Bases:** `Dataset`
+
+**Attributes:**
+- `num_sample`(`int`): number of samples in the dataset
+- `num_nodes`(`int`): number of nodes
+- `device`(`str`): device to store the data (CPU/GPU)
+
+**Methods:**
+- **`__init__`**: The class is initialized with parameters like the number of samples (`num_sample`), number of nodes (`num_nodes`), and the device (e.g., CPU or GPU).
 - **`__getitem__`**: **`[due_time, weights, processing_time]`** are sampled as $t_i \sim n \times \mathrm{Uniform}(0, 1), \quad w_i \sim \mathrm{Uniform}(0, 1), \quad p_i \sim \mathrm{Uniform}(0, 1)$
 
 
 ### Custom Data Loading
 For users with specific data requirements, the `customized_smtwtp_loader` class allows loading customized SMTWTP data from files.
+
+```python
+class customized_smtwtp_loader(
+  num_sample, 
+  num_nodes, 
+  device, 
+  path
+  )
+```
+
+**Bases:** `Dataset`
+
+**Attributes:**
++ `num_sample`(`int`): number of samples in the dataset
++ `num_node`(`int`): number of nodes
++ `device`(`str`): device to store the data (CPU/GPU)
++ `path`(`str`): the specified path of custom data
++ `file_type`(`str`): the file type
+
 
 - **File Support**: It supports files in `.pkl` (Python pickle) or `.pt` (PyTorch tensor) formats.
 - **Data Loading**: The data is loaded and converted into a tensor format suitable for use with PyTorch.

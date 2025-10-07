@@ -136,16 +136,20 @@ EasyCO supports the following NCO methods:
     methods/elg
     methods/glop
     methods/htsp
+    methods/icam
     methods/invit
+    methods/l2s
     methods/lehd
     methods/LIH
     methods/matnet
     methods/MTPOMO
     methods/MVMoE
     methods/nlns
+    methods/omni
     methods/pointerformer
     methods/pomo
     methods/t2t
+    methods/udc
 
 
 
@@ -175,8 +179,6 @@ EasyCO supports the following NCO methods:
 
 📄Citation
 -------------------
-
-
 
 .. code-block:: bibtex
 

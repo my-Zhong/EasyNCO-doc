@@ -37,7 +37,7 @@ class random_ffsp_generator(
 
 **Bases:** `Dataset`
 
-**Parameters:**
+**Attributes:**
 + `num_sample`(`int`): number of samples in the dataset
 + `machine_cnt_list`(`list`): list of machine counts per stage, e.g., `[4,4,4]` means 3 stages each with 4 machines
 + `job_cnt`(`int`): number of jobs
@@ -61,7 +61,7 @@ class customized_ffsp_loader(
 
 **Bases:** `Dataset`
 
-**Parameters:**
+**Attributes:**
 + `num_sample`(`int`): number of samples in the dataset
 + `device`(`str`): device to store the data (CPU/GPU)
 + `path`(`str`): the specified path of custom data

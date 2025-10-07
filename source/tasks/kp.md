@@ -17,7 +17,6 @@ The **Knapsack Problem (KP)** is a classic combinatorial optimization problem wh
   - Maximize total value of selected items
 
 
-
 ## Data Generator
 
 This module mainly provides a function `def KPGenerator()`, which is used to generate a `DataLoader` object (see `data/KPGenerator.py`).
@@ -37,7 +36,7 @@ class random_kp_generator(
 
 **Bases:** `Dataset`
 
-**Parameters:**
+**Attributes:**
 + `num_sample`(`int`): number of samples in the dataset
 + `num_items`(`int`):  number of items in a instance
 + `device`(`str`): device to store the data (CPU/GPU)
@@ -53,12 +52,13 @@ class customized_kp_loader(
   num_sample, 
   num_items, 
   device, 
-  path)
+  path
+  )
 ```
 
 **Bases:** `Dataset`
 
-**Parameters:**
+**Attributes:**
 + `num_sample`(`int`): number of instances in the dataset
 + `num_items`(`int`): number of items in a instance
 + `device`(`str`): device to store the data (CPU/GPU)
