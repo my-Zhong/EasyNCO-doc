@@ -8,16 +8,13 @@ Graphical User Interface (GUI)
 > To run the GUI correctly, you must place the `EasyCO` project folder in the proper directory on your remote server. Then, execute the GUI's Python script `run_gui_test.py` on your local machine (an operating system that can render a graphical interface, typically Windows).
 
 
-- **Menu Bar**
-
+  - **Menu Bar**
 ![GUI_Menubar](../_static/Menubar.png "GUI_Menubar")
-    
-**[`github`](https://github.com/changliang5811/EasyNCO)**: Redirects to the `EasyCO` GitHub repository.
+    - **[`github`](https://github.com/changliang5811/EasyNCO)**: Redirects to the `EasyCO` GitHub repository.
+    - **`documention`**:  Redirects to the `EasyCO` documentation page for user guides and references.
 
-**`documention`**:  Redirects to the `EasyCO` documentation page for user guides and references.
 
 - **Server Setup**
-
 ![GUI_ServerSetup](../_static/Server_Setup.png "GUI_ServerSetup")
 * `host`: The server’s IP address or domain name to connect to.
 * `port`: The specific port number through which the connection is established.
