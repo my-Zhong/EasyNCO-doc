@@ -1,7 +1,8 @@
+Neural Solvers
+==================
 
 .. toctree::
     :maxdepth: 1
-    :caption: Neural Solvers
 
     neural_solvers/backbones
     neural_solvers/environment
