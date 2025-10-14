@@ -1,5 +1,4 @@
 # MatNet
-Matrix Encoding Networks for Neural Combinatorial Optimization, https://proceedings.neurips.cc/paper/2021/hash/29539ed932d32f1c56324cded92c07c2-Abstract.html, 2021 NIPS
 
 MatNet is a neural matrix encoding network that processes bipartite graph-structured data with a dual attention mechanism to solve asymmetric combinatorial optimization problems like ATSP and FFSP through end-to-end reinforcement learning.
 ![matnet](../_static/MatNet.png)

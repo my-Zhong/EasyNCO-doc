@@ -1,5 +1,7 @@
+# Asymmetric Traveling Salesman Problem
+
 ## Introduction
-The Asymmetric Traveling Salesman Problem (ATSP) seeks to find the shortest possible route that visits a set of cities exactly once and returns to the origin, with the defining characteristic that the travel cost from city A to city B may be different from the cost of returning from B to A.
+The **Asymmetric Traveling Salesman Problem (ATSP)** seeks to find the shortest possible route that visits a set of cities exactly once and returns to the origin, with the defining characteristic that the travel cost from city A to city B may be different from the cost of returning from B to A.
 
 ### Problem Description
 - **Entities**

@@ -1,4 +1,4 @@
-# [POMO](https://proceedings.neurips.cc/paper/2020/hash/f231f2107df69eab0a3862d50018a9b2-Abstract.html)
+# POMO
 
 the proposed Light Encoder and Heavy Decoder (LEHD) method is a neural solver for Vehicle Routing Problems that 
 integrates a primary global policy, which learns from the complete VRP instance, with an auxiliary local policy that

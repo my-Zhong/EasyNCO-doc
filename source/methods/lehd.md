@@ -1,17 +1,7 @@
-# [AM](https://proceedings.neurips.cc/paper_files/paper/2023/hash/1c10d0c087c14689628124bbc8fa69f6-Abstract-Conference.html)
+# LEHD
 
 the proposed Light Encoder and Heavy Decoder (LEHD) method is a neural solver for Vehicle Routing Problems.
 
-```bib
-@article{luo2023neural,
-  title={Neural combinatorial optimization with heavy decoder: Toward large scale generalization},
-  author={Luo, Fu and Lin, Xi and Liu, Fei and Zhang, Qingfu and Wang, Zhenkun},
-  journal={Advances in Neural Information Processing Systems},
-  volume={36},
-  pages={8845--8864},
-  year={2023}
-}
-```
 ## LEHDInitialization
 
 **Bases:** `Initialization`

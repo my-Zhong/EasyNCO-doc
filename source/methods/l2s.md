@@ -1,4 +1,4 @@
-# L2S (Deep Reinforcement Learning Guided Improvement Heuristic for Job Shop Scheduling) 2024 ICLR
+# L2S
 
 L2S proposes a DRL-based improvement heuristic for JSSP. It encodes complete solutions as disjunctive graphs, leverages 
 a dual-module GNN (TPM for topology, CAM for job–machine semantics),

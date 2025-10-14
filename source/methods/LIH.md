@@ -1,23 +1,10 @@
 # LIH
-Learning Improvement Heuristics for Solving Routing Problems,https://ieeexplore.ieee.org/document/9393606, 2021 TNNLS
 
 LIH is a combinatorial optimization framework that combines deep reinforcement learning with a self-attention-based architecture, leveraging learned improvement heuristics 
 and policy network-guided local search to derive high-quality solutions for routing problems. 
 
 <img src="../_static/lih.png" alt="lih" width="800">
 
-```bib
-@article{wu2021learning,
-  title={Learning improvement heuristics for solving routing problems},
-  author={Wu, Yaoxin and Song, Wen and Cao, Zhiguang and Zhang, Jie and Lim, Andrew},
-  journal={IEEE transactions on neural networks and learning systems},
-  volume={33},
-  number={9},
-  pages={5057--5069},
-  year={2021},
-  publisher={IEEE}
-}
-```
 
 ## `LIHInitialization`
 

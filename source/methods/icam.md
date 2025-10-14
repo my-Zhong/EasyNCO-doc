@@ -1,5 +1,4 @@
 # ICAM
-Instance-Conditioned Adaptation for Large-scale Generalization of Neural Combinatorial Optimization, http://arxiv.org/abs/2405.01906
 
 ICAM is a reinforcement learning-based neural combinatorial optimization model that utilizes instance-conditioned adaptation and a multi-stage training scheme to achieve efficient large-scale generalization for routing problems such as TSP and CVRP.
 ![icam](../_static/ICAM.png)

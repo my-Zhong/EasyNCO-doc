@@ -1,5 +1,4 @@
 # DPN
-DPN: decoupling partition and navigation for neural solvers of min-max vehicle routing problems, http://arxiv.org/abs/2405.17272, 2024 ICML
 
 DPN is a neural solver for min-max vehicle routing problems that decouples partition and navigation tasks using a specialized attention-based encoder and leverages agent-permutation symmetry to enhance solution quality.
 ![dpn](../_static/DPN.png)

@@ -1,22 +1,9 @@
 # DACT
-Learning to Iteratively Solve Routing Problems with
-Dual-Aspect Collaborative Transformer, https://arxiv.org/pdf/2110.02544, 2021 nips 
 
 DACT (Dual-Aspect Collaborative Transformer) improves VRP-solving performance by avoiding the noise caused by traditional position encoding (PE). It separates node feature embedding (NFE) and positional feature embedding (PFE), and uses cyclic positional encoding (CPE) based on circular Gray codes to capture the symmetry in VRP solutions. A curriculum learning strategy further improves the efficiency of reinforcement learning.
 
 <img src="../_static/dact.png" alt="dact" width="1400">
- 
 
-```bib
-@article{ma2021learning,
-  title={Learning to iteratively solve routing problems with dual-aspect collaborative transformer},
-  author={Ma, Yining and Li, Jingwen and Cao, Zhiguang and Song, Wen and Zhang, Le and Chen, Zhenghua and Tang, Jing},
-  journal={Advances in Neural Information Processing Systems},
-  volume={34},
-  pages={11096--11107},
-  year={2021}
-}
-```
 
 ## `DACTInitialization`
 

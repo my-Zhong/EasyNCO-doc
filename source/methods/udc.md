@@ -1,5 +1,4 @@
 # UDC
-UDC: a unified neural divide-and-conquer framework for large-scale combinatorial optimization problem, http://arxiv.org/abs/2407.00312, 2024 nips
 
 UDC is a unified neural divide-and-conquer framework that employs a graph neural network for global partitioning and a fixed-length sub-solver with a novel Divide-Conquer-Reunion training scheme to solve large-scale combinatorial optimization problems efficiently and generally.
 ![udc](../_static/UDC.png)

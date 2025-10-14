@@ -1,4 +1,4 @@
-# OMNI(Towards Omni-generalizable Neural Methods for Vehicle Routing Problems) 2023 ICML
+# OMNI
 Omni focuses on the generalization challenge of neural methods in Vehicle Routing Problems (VRPs) and proposes a universal meta-learning framework to achieve "full generalization" across problem scales and distributions.
 
 ## Usage

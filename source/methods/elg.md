@@ -1,17 +1,9 @@
-# [ELG](https://arxiv.org/abs/2308.14104)
+# ELG
 
 the proposed Ensemble of Local and Global policies (ELG) method is a neural solver for Vehicle Routing Problems that 
 integrates a primary global policy, which learns from the complete VRP instance, with an auxiliary local policy that
 learns from transferable local topological features to boost generalization performance.
 
-```bib
-@article{gao2023towards,
-  title={Towards generalizable neural solvers for vehicle routing problems via ensemble with transferrable local policy},
-  author={Gao, Chengrui and Shang, Haopu and Xue, Ke and Li, Dong and Qian, Chao},
-  journal={arXiv preprint arXiv:2308.14104},
-  year={2023}
-}
-```
 
 ## ELGInitialization
 

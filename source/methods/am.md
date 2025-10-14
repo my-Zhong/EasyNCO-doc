@@ -1,16 +1,8 @@
-# [AM](https://arxiv.org/pdf/1803.08475)
+# AM
 
-the proposed AM method is a neural solver for Vehicle Routing Problems that utilize the transformer architecture and trained by reinforcement learning
+AM is a neural solver for Vehicle Routing Problems that utilize the transformer architecture and trained by reinforcement learning.
 
 
-```bib
-@article{kool2018attention,
-  title={Attention, learn to solve routing problems!},
-  author={Kool, Wouter and Van Hoof, Herke and Welling, Max},
-  journal={arXiv preprint arXiv:1803.08475},
-  year={2018}
-}
-```
 ## AMInitialization
 
 **Bases:** `Initialization`

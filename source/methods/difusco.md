@@ -1,17 +1,7 @@
-# [DIFUSCO](https://proceedings.neurips.cc/paper_files/paper/2023/hash/0ba520d93c3df592c83a611961314c98-Abstract-Conference.html)
+# DIFUSCO
 
 DIFUSCO is a graph-based diffusion framework that solves combinatorial optimization problems by formulating them as discrete {0,1}-vector optimization problems and using a denoising diffusion model to generate high-quality solutions.
 
-```bib
-@article{sun2023difusco,
-  title={Difusco: Graph-based diffusion solvers for combinatorial optimization},
-  author={Sun, Zhiqing and Yang, Yiming},
-  journal={Advances in neural information processing systems},
-  volume={36},
-  pages={3706--3731},
-  year={2023}
-}
-```
 ## DIFUSCOInitialization
 **Bases:**  `Initialization`
 

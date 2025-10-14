@@ -1,16 +1,7 @@
-# [INViT](https://arxiv.org/abs/2402.02317)
+# INViT
 
 the proposed Invariant Nested View Transformer (INViT) method is a neural solver for Vehicle Routing Problems. 
 
-
-```bib
-@article{fang2024invit,
-  title={Invit: A generalizable routing problem solver with invariant nested view transformer},
-  author={Fang, Han and Song, Zhihao and Weng, Paul and Ban, Yutong},
-  journal={arXiv preprint arXiv:2402.02317},
-  year={2024}
-}
-```
 ## INViTInitialization
 
 **Bases:** `Initialization`

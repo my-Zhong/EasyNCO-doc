@@ -1,3 +1,5 @@
+# Prize Collecting Traveling Salesperson Problem
+
 ## Introduction
 
 The **Prize Collecting Traveling Salesperson Problem (PCTSP)** is a variant of the Traveling Salesperson Problem where the objective is to find a tour that visits a subset of nodes to collect prizes, minimizing the sum of travel costs and penalties for unvisited nodes, while potentially satisfying a minimum collected prize threshold.

@@ -1,4 +1,3 @@
-
 # Multiple Knapsack Problem 
 
 ## Introduction

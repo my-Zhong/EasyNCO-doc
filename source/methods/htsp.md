@@ -3,19 +3,6 @@
 H-TSP is an end-to-end deep reinforcement learning approach that can handle TSP problems with up to 10,000 nodes. H-TSP uses a hierarchical reinforcement learning approach, which means it breaks down the big problem into smaller parts and solves them in two steps.
 
 
-## CITATION 
-(should be deleted later)
-@inproceedings{pan2023h-tsp,
-    author = {Pan, Xuanhao and Jin, Yan and Ding, Yuandong and Feng, Mingxiao and Zhao, Li and Song, Lei and Bian, Jiang},
-    title = {H-TSP: Hierarchically Solving the Large-Scale Traveling Salesman Problem},
-    booktitle = {AAAI 2023},
-    year = {2023},
-    month = {February},
-    url = {https://www.microsoft.com/en-us/research/publication/h-tsp-hierarchically-solving-the-large-scale-traveling-salesman-problem/},
-}
-
-
-
 ## `HTSPInitialization`
 
 **Bases:** `Initialization`

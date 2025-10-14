@@ -1,19 +1,9 @@
-# [T2T](https://proceedings.neurips.cc/paper_files/paper/2023/hash/9c93b3cd3bc60c0fe7b0c2d74a2da966-Abstract-Conference.html)
+# T2T
 
 The T2T framework is a method that first uses generative modeling to learn the distribution of 
 high-quality solutions for a given problem during training, and then performs a gradient-based search within that solution
 space during testing to find an optimal solution for a specific instance.
 
-```bib
-@article{li2023t2t,
-  title={T2t: From distribution learning in training to gradient search in testing for combinatorial optimization},
-  author={Li, Yang and Guo, Jinpei and Wang, Runzhong and Yan, Junchi},
-  journal={Advances in Neural Information Processing Systems},
-  volume={36},
-  pages={50020--50040},
-  year={2023}
-}
-```
 ## T2TInitialization
 **Bases:**  `Initialization`
 

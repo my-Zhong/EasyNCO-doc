@@ -1,5 +1,7 @@
+# Traveling Salesman Problem
+
 ## Introduction
-The Traveling Salesman Problem (TSP) seeks to find the shortest possible route that visits a set of cities and returns to the starting city, visiting each city exactly once.
+The **Traveling Salesman Problem (TSP)** seeks to find the shortest possible route that visits a set of cities and returns to the starting city, visiting each city exactly once.
 
 ### Problem Description
 - **Entities**
