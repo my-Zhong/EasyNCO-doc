@@ -1,5 +1,61 @@
 # LIH
-LIH is a combinatorial optimization framework that combines deep reinforcement learning with a self-attention-based architecture, leveraging learned improvement heuristics and policy network-guided local search to derive high-quality solutions for routing problems. 
+Learning Improvement Heuristics for Solving Routing Problems,https://ieeexplore.ieee.org/document/9393606, 2021 TNNLS
+
+LIH is a combinatorial optimization framework that combines deep reinforcement learning with a self-attention-based architecture, leveraging learned improvement heuristics 
+and policy network-guided local search to derive high-quality solutions for routing problems. 
+
+<img src="../_static/lih.png" alt="lih" width="800">
+
+```bib
+@article{wu2021learning,
+  title={Learning improvement heuristics for solving routing problems},
+  author={Wu, Yaoxin and Song, Wen and Cao, Zhiguang and Zhang, Jie and Lim, Andrew},
+  journal={IEEE transactions on neural networks and learning systems},
+  volume={33},
+  number={9},
+  pages={5057--5069},
+  year={2021},
+  publisher={IEEE}
+}
+```
+
+## `LIHInitialization`
+
+**Bases:** `Initialization`
+
+**Methods:**
+`Initialization_tool`
+* The Initialization_tool is used to generate initial solutions and calculate the length of these solutions. 
+For the TSP (Traveling Salesman Problem), initial solutions are generated via the random initial method; 
+for the CVRP (Capacitated Vehicle Routing Problem), initial solutions are generated using the nearest insertion method.
+
+
+## `LIHIteration`
+
+**Bases:** `Iteration`
+
+**Methods:**
++ `2-opt`: It improves the solution with the `2-opt` operator under given iterations.
+
+## `LIHPolicy`
++ `class LIHPolicy`:
+```python
+    def __init__(
+        self,
+        env_name: str = "tsp",  
+        embed_dim: int = 128,
+        init_embedding: nn.Module = None,
+        num_heads: int = 1,
+        qkv_dim: int = 128,
+        num_encoder_layers: int = 3,
+        normalization: str = "batch", 
+        feedforward_hidden: int = 512,
+        **kwargs
+    )
+```
+
+## `LIHModel`
+LIH is based on the Transformer architecture. In the encoder, it employs single-head attention, while in the decoder, full-graph maxpooling is added as supplementary information.
 
 
 ## Usage
@@ -36,8 +92,6 @@ Required Data Generator:
 + LIH starts by randomly generating an initial solution. The neural network then selects a pair of nodes for the 2-opt operation to improve the solution iteratively.
 
 + In the CVRP problem, each node is represented by a 7-dimensional vector, formed by concatenating the previous node $x_{t-1}$, the current node $x_t$, the next node $x_{t+1}$, and the demand.
-
-
 
 
 ## Training
